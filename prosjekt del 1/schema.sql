@@ -153,12 +153,12 @@ CREATE TABLE
 
 CREATE TABLE
     Kjøp (
+        KjøpID INT AUTO_INCREMENT PRIMARY KEY,
         KundeID INT NOT NULL,
         BillettID INT NOT NULL,
         Kjøpstidspunkt DATETIME NOT NULL,
         FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID),
         FOREIGN KEY (BillettID) REFERENCES Billett (BillettID),
-        PRIMARY KEY (KundeID, BillettID, Kjøpstidspunkt)
     );
     
 CREATE TABLE
