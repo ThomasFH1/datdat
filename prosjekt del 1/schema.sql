@@ -160,7 +160,7 @@ CREATE TABLE
         FOREIGN KEY (BillettID) REFERENCES Billett (BillettID),
         PRIMARY KEY (KundeID, BillettID, Kjøpstidspunkt)
     );
-    
+
 CREATE TABLE
     Oppgaver (
         OppgaveID INT AUTO_INCREMENT PRIMARY KEY,
@@ -187,20 +187,33 @@ CREATE TABLE
     Deltar (
         RolleID INT NOT NULL,
         Aktnummer SMALLINT NOT NULL,
-        StykkeID INT NOT NULL
+        StykkeID INT NOT NULL, 
+        PRIMARY KEY (RolleID, Aktnummer, StykkeID) 
     );
+
+CREATE TABLE
+    Status (Statusnavn VARCHAR(128) PRIMARY KEY);
 
 CREATE TABLE
     Kontrakt (
+        KontraktID INTEGER PRIMARY KEY,
         Signeringsdato DATE NOT NULL,
-        Ansattstatus VARCHAR(128) NOT NULL
+        Statusnavn VARCHAR(128) NOT NULL,
+        KontraktType VARCHAR(50) NOT NULL, -- 'Ansatt' eller 'Direktør'
+        FOREIGN KEY (Statusnavn) REFERENCES Status (Statusnavn)
     );
 
 CREATE TABLE
-    DirektorKontrakt (DirektorkontraktID INT AUTO_INCREMENT PRIMARY KEY);
+    DirektorKontrakt (
+        DirektorkontraktID INTEGER,
+        FOREIGN KEY (DirektorkontraktID) REFERENCES Kontrakt (KontraktID)
+    );
 
 CREATE TABLE
-    AnsattKontrakt (AnsattkontraktID INT AUTO_INCREMENT PRIMARY KEY);
+    AnsattKontrakt (
+        AnsattkontraktID INTEGER,
+        FOREIGN KEY (AnsattkontraktID) REFERENCES Kontrakt (KontraktID)
+    );
 
 CREATE TABLE
     Jobbtittel (Jobbtittel VARCHAR(128) NOT NULL);
