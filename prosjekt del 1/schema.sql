@@ -162,14 +162,6 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    Oppgaver (
-        OppgaveID INT AUTO_INCREMENT PRIMARY KEY,
-        Oppgavenavn VARCHAR(128) NOT NULL,
-        StykkeID INT NOT NULL,
-        FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE
-    );
-
-CREATE TABLE
     Lag (
         Lagnavn VARCHAR(128) NOT NULL,
         StykkeID INT NOT NULL,
@@ -178,30 +170,49 @@ CREATE TABLE
     );
 
 CREATE TABLE
+    Oppgaver (
+        OppgaveID INT AUTO_INCREMENT NOT NULL,
+        Oppgavenavn VARCHAR(128) NOT NULL,
+        StykkeID INT NOT NULL,
+        Lagnavn VARCHAR(128) NOT NULL,
+        PRIMARY KEY (OppgaveID, StykkeID)
+        FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE
+        FOREIGN KEY (Lagnavn, StykkeID) REFERENCES Lag(Lagnavn, StykkeID)
+    );
+
+CREATE TABLE
     Rolle (
-        RolleID INT AUTO_INCREMENT PRIMARY KEY,
-        Rollenavn VARCHAR(128) NOT NULL
+        OppgaveID INT AUTO_INCREMENT,
+        StykkeID INT NOT NULL,
+        Oppgavenavn VARCHAR(128) NOT NULL,
+        Rollenavn VARCHAR(128) NOT NULL,
+        PRIMARY KEY (OppgaveID, StykkeID)
+        FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Oppgaver(OppgaveID, StykkeID)
+
     );
 
 CREATE TABLE
     Deltar (
-        RolleID INT NOT NULL,
         Aktnummer SMALLINT NOT NULL,
         StykkeID INT NOT NULL, 
-        PRIMARY KEY (RolleID, Aktnummer, StykkeID) 
+        OppgaveID INT NOT NULL,
+        PRIMARY KEY (Aktnummer, StykkeID, OppgaveID) 
+        FOREIGN KEY (Aktnummer, StykkeID) REFERENCES Akt(Aktnummer, StykkeID)
+        FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Rolle(OppgaveID, StykkeID)
     );
 
 CREATE TABLE
     Status (Statusnavn VARCHAR(128) PRIMARY KEY);
 
-CREATE TABLE
-    Kontrakt (
-        KontraktID INTEGER PRIMARY KEY,
-        Signeringsdato DATE NOT NULL,
-        Statusnavn VARCHAR(128) NOT NULL,
-        KontraktType VARCHAR(50) NOT NULL, -- 'Ansatt' eller 'Direktør'
-        FOREIGN KEY (Statusnavn) REFERENCES Status (Statusnavn)
-    );
+CREATE TABLE Kontrakt (
+    KontraktID INTEGER PRIMARY KEY,
+    Signeringsdato DATE NOT NULL,
+    Statusnavn VARCHAR(128) NOT NULL,
+    KontraktType VARCHAR(50) NOT NULL,
+    FOREIGN KEY (Statusnavn) REFERENCES Status (Statusnavn),
+    CHECK (KontraktType IN ('Ansatt', 'Direktør'))
+);
+
 
 CREATE TABLE
     DirektorKontrakt (
