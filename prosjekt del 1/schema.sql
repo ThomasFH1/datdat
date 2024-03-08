@@ -158,7 +158,7 @@ CREATE TABLE
         BillettID INT NOT NULL,
         Kjøpstidspunkt DATETIME NOT NULL,
         FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID),
-        FOREIGN KEY (BillettID) REFERENCES Billett (BillettID),
+        FOREIGN KEY (BillettID) REFERENCES Billett (BillettID)
     );
 
 CREATE TABLE
@@ -217,3 +217,12 @@ CREATE TABLE
 
 CREATE TABLE
     Jobbtittel (Jobbtittel VARCHAR(128) NOT NULL);
+
+CREATE TABLE 
+    HarOppgaver (
+        AnsattID INT NOT NULL,
+        OppgaveID INT NOT NULL,
+        PRIMARY KEY (AnsattID, OppgaveID),
+        FOREIGN KEY (AnsattID) REFERENCES Ansatt(AnsattID),
+        FOREIGN KEY (OppgaveID) REFERENCES Oppgaver(OppgaveID)
+    );
