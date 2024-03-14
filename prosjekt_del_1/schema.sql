@@ -1,6 +1,6 @@
 CREATE TABLE
     Teater (
-        TeaterID INT NOT NULL PRIMARY KEY,
+        TeaterID INT PRIMARY KEY,
         Teaternavn VARCHAR(128) NOT NULL
     );
 
@@ -50,10 +50,9 @@ CREATE TABLE
 
 CREATE TABLE
     Teaterstykke (
-        StykkeID INT NOT NULL,
+        StykkeID INT PRIMARY KEY,
         Stykketittel VARCHAR(128) NOT NULL,
-        VarighetMinutt SMALLINT NOT NULL,
-        PRIMARY KEY (StykkeID)
+        VarighetMinutt SMALLINT NOT NULL
     );
 
 CREATE TABLE
@@ -92,7 +91,7 @@ CREATE TABLE
 
 CREATE TABLE
     Billett (
-        BillettID INT NOT NULL,
+        BillettID INT PRIMARY KEY,
         Kolonnenummer SMALLINT NOT NULL,
         Radnummer SMALLINT NOT NULL,
         Områdenummer INT NOT NULL,
@@ -100,7 +99,6 @@ CREATE TABLE
         TeaterID INT NOT NULL,
         Fremvisningstidspunkt DATETIME NOT NULL,
         StykkeID INT NOT NULL,
-        PRIMARY KEY (BillettID),
         FOREIGN KEY (
             Kolonnenummer,
             Radnummer,
@@ -138,7 +136,7 @@ CREATE TABLE
 
 CREATE TABLE
     Ansatt (
-        AnsattID INT AUTO_INCREMENT PRIMARY KEY,
+        AnsattID INT PRIMARY KEY,
         Personnummer INT NOT NULL UNIQUE,
         BrukerID INT NOT NULL UNIQUE,
         FOREIGN KEY (BrukerID) REFERENCES Bruker (BrukerID)
@@ -146,14 +144,14 @@ CREATE TABLE
 
 CREATE TABLE
     Kunde (
-        KundeID INT AUTO_INCREMENT PRIMARY KEY,
+        KundeID INT PRIMARY KEY,
         BrukerID INT NOT NULL UNIQUE,
         FOREIGN KEY (BrukerID) REFERENCES Bruker (BrukerID)
     );
 
 CREATE TABLE
     Kjøp (
-        KjøpID INT AUTO_INCREMENT PRIMARY KEY,
+        KjøpID INT PRIMARY KEY,
         KundeID INT NOT NULL,
         BillettID INT NOT NULL  UNIQUE,
         Kjøpstidspunkt DATETIME NOT NULL,
@@ -171,7 +169,7 @@ CREATE TABLE
 
 CREATE TABLE
     Oppgaver (
-        OppgaveID INT AUTO_INCREMENT NOT NULL,
+        OppgaveID INT,
         Oppgavenavn VARCHAR(128) NOT NULL,
         StykkeID INT NOT NULL,
         Lagnavn VARCHAR(128) NOT NULL,
@@ -182,7 +180,7 @@ CREATE TABLE
 
 CREATE TABLE
     Rolle (
-        OppgaveID INT AUTO_INCREMENT,
+        OppgaveID INT,
         StykkeID INT NOT NULL,
         Oppgavenavn VARCHAR(128) NOT NULL,
         PRIMARY KEY (OppgaveID, StykkeID)
