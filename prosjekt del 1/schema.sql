@@ -39,7 +39,6 @@ CREATE TABLE
         Områdenummer INT NOT NULL,
         Salnavn VARCHAR(128) NOT NULL,
         TeaterID INT NOT NULL,
-        Handicapstol BOOLEAN NOT NULL,
         PRIMARY KEY (
             Kolonnenummer,
             Radnummer,
@@ -60,8 +59,8 @@ CREATE TABLE
 CREATE TABLE
     Akt (
         Aktnummer INT NOT NULL,
-        Aktnavn VARCHAR(128) NOT NULL,
         StykkeID INT NOT NULL,
+        Aktnavn VARCHAR(128) NOT NULL,
         PRIMARY KEY (Aktnummer, StykkeID) FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
@@ -86,6 +85,7 @@ CREATE TABLE
         Prisgruppe VARCHAR(128) NOT NULL,
         StykkeID INT NOT NULL,
         Pris SMALLINT NOT NULL,
+        Minimumsantall SMALLINT NOT NULL CHECK(Minimumsantall >= 1),
         PRIMARY KEY (Prisgruppe, StykkeID),
         FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE
     );
@@ -155,7 +155,7 @@ CREATE TABLE
     Kjøp (
         KjøpID INT AUTO_INCREMENT PRIMARY KEY,
         KundeID INT NOT NULL,
-        BillettID INT NOT NULL,
+        BillettID INT NOT NULL  UNIQUE,
         Kjøpstidspunkt DATETIME NOT NULL,
         FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID),
         FOREIGN KEY (BillettID) REFERENCES Billett (BillettID)
@@ -185,7 +185,6 @@ CREATE TABLE
         OppgaveID INT AUTO_INCREMENT,
         StykkeID INT NOT NULL,
         Oppgavenavn VARCHAR(128) NOT NULL,
-        Rollenavn VARCHAR(128) NOT NULL,
         PRIMARY KEY (OppgaveID, StykkeID)
         FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Oppgaver(OppgaveID, StykkeID)
 
@@ -215,15 +214,21 @@ CREATE TABLE Kontrakt (
 
 
 CREATE TABLE
-    DirektorKontrakt (
-        DirektorkontraktID INTEGER,
-        FOREIGN KEY (DirektorkontraktID) REFERENCES Kontrakt (KontraktID)
+    Direktørkontrakt (
+        DirektørkontraktID INTEGER,
+        TeaterID INT NOT NULL UNIQUE,
+        FOREIGN KEY (TeaterID) REFERENCES Teater(TeaterID)
+        FOREIGN KEY (DirektørkontraktID) REFERENCES Kontrakt (KontraktID)
     );
 
 CREATE TABLE
     AnsattKontrakt (
         AnsattkontraktID INTEGER,
-        FOREIGN KEY (AnsattkontraktID) REFERENCES Kontrakt (KontraktID)
+        TeaterID INT NOT NULL,
+        Jobbtittel VARCHAR(128) NOT NULL,
+        FOREIGN KEY (TeaterID) REFERENCES Teater(TeaterID),
+        FOREIGN KEY (AnsattkontraktID) REFERENCES Kontrakt (KontraktID),
+        FOREIGN KEY (Jobbtittel) REFERENCES Jobbtittel(Jobbtittel)
     );
 
 CREATE TABLE
@@ -233,7 +238,8 @@ CREATE TABLE
     HarOppgaver (
         AnsattID INT NOT NULL,
         OppgaveID INT NOT NULL,
+        StykkeID INT NOT NULL, 
         PRIMARY KEY (AnsattID, OppgaveID),
         FOREIGN KEY (AnsattID) REFERENCES Ansatt(AnsattID),
-        FOREIGN KEY (OppgaveID) REFERENCES Oppgaver(OppgaveID)
+        FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Oppgaver(OppgaveID, StykkeID)
     );
