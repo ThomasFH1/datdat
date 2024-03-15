@@ -37,6 +37,11 @@ VALUES
 ('Emil', 'Olafsson', '+47000012', 'Slottsplassen 1, 0010 Oslo'),
 ('Snorre Ryen', 'Tøndel', '+47000013', 'Slottsplassen 1, 0010 Oslo');
 
+/*Setter inn kunstnerisk lag til kongsemnene først som brukere, så ansatte*/
+INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
+VALUES 
+('Yury', 'Butusov', )
+
 INSERT INTO Ansatt (AnsattID, Personnummer, BrukerID)
 VALUES 
 (1, 00000000001, 1),
@@ -73,3 +78,10 @@ VALUES
 ('2024-04-11 18:30', 'Hovedscenen', 1, 2),
 ('2024-04-12 18:30', 'Hovedscenen', 1, 2);
 
+/*Lagene til begge teaterstykker */
+INSERT INTO Lag (Lagnavn, StykkeID)
+VALUES 
+('Medvirkende', '1')
+('Kunstnerisk lag', '1')
+('Medvirkende', '2')
+('Kunstnerisk lag', '2')
