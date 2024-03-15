@@ -58,6 +58,27 @@ VALUES
 (12, 00000000012, 12),
 (13, 00000000013, 13);
 
+/*Setter inn skuespillere SAAEK først som brukere, så ansatte*/
+INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
+VALUES 
+('Sunniva Du Mond', 'Nordal', '+47000014', 'Slottsplassen 1, 0010 Oslo'),
+('Jo', 'Saberniak', '+47000015', 'Slottsplassen 1, 0010 Oslo'),
+('Marte M.', 'Steinholt', '+47000016', 'Slottsplassen 1, 0010 Oslo'),
+('Tor Ivar', 'Hagen', '+47000017', 'Slottsplassen 1, 0010 Oslo'),
+('Trond-Ove', 'Skrødal', '+47000018', 'Slottsplassen 1, 0010 Oslo'),
+('Natalie Grøndahl', 'Tangen', '+47000019', 'Slottsplassen 1, 0010 Oslo'),
+('Åsmund', 'Flaten', '+47000020', 'Slottsplassen 1, 0010 Oslo');
+
+INSERT INTO Ansatt (AnsattID, Personnummer, BrukerID)
+VALUES 
+(14, '00000000014', 14),
+(15, '00000000015', 15),
+(16, '00000000016', 16),
+(17, '00000000017', 17),
+(18, '00000000018', 18),
+(19, '00000000019', 19),
+(20, '00000000020', 20);
+
 
 
 /*Fremvisninger SAAEK, pass på at TeaterID og StykkeID er riktig*/
