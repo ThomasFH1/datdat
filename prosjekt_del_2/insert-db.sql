@@ -1,5 +1,9 @@
 /*SAAEK=Størst av alt er kjærligheten*/
 /*Innsetting av teaterstykkene*/
+INSERT INTO Teater (TeaterID, Teaternavn)
+VALUES
+(1, "Trøndelag Teater");
+
 INSERT INTO Teaterstykke (StykkeID, Stykketittel, VarighetMinutt)
 VALUES 
 (1, 'Størst av alt er kjærligheten', 90),
@@ -17,7 +21,7 @@ VALUES
 /*Akter SAAEK*/
 INSERT INTO Akt (Aktnummer, StykkeID, Aktnavn)
 VALUES 
-(1, 1, 'akt_1'),
+(1, 1, 'akt_1');
 
 
 /*Setter inn skuespillere kongsemnene først som brukere, så ansatte*/
