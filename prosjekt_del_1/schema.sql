@@ -63,21 +63,6 @@ CREATE TABLE
         PRIMARY KEY (Aktnummer, StykkeID) FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
-CREATE TABLE
-    Fremvisning (
-        Fremvisningstidspunkt DATETIME NOT NULL,
-        Salnavn VARCHAR(128) NOT NULL,
-        TeaterID INT NOT NULL,
-        StykkeID INT NOT NULL,
-        PRIMARY KEY (
-            Fremvisningstidspunkt,
-            Salnavn,
-            TeaterID,
-            StykkeID
-        ),
-        FOREIGN KEY (Salnavn, TeaterID) REFERENCES Sal (Salnavn, TeaterID) ON UPDATE CASCADE ON DELETE CASCADE,
-        FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE
-    );
 
 CREATE TABLE
     BillettPris (
