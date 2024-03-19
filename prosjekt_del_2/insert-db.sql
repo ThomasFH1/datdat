@@ -132,7 +132,7 @@ VALUES
 /*Lagene til begge teaterstykker */
 INSERT INTO Lag (Lagnavn, StykkeID)
 VALUES 
-('Medvirkende', '1')
-('Kunstnerisk lag', '1')
-('Medvirkende', '2')
-('Kunstnerisk lag', '2')
+('Medvirkende', '1'),
+('Kunstnerisk lag', '1'),
+('Medvirkende', '2'),
+('Kunstnerisk lag', '2');
