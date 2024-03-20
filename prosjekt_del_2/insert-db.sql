@@ -176,7 +176,6 @@ INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES
 ('Kong', 'Harald', '+47000030', 'Kongens gate 1, 0153 Oslo');
 
--- Insert the new user as a customer
 INSERT INTO Kunde (KundeID, BrukerID)
 VALUES
 (30, 30);
