@@ -245,5 +245,4 @@ VALUES
 (30, 30);
 
 INSERT INTO Rolle (OppgaveID, Oppgavenavn, StykkeID)
-VALUES
-()
+VALUE
