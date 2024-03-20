@@ -1,9 +1,9 @@
 ```bash
-python prosjekt_del_2/manage.py brukerhistorie BRUKERHISTORIENUMMER
+python -m prosjekt_del_2.manage brukerhistorie BRUKERHISTORIENUMMER
 ```
 
 Eksempelkjøring
 
 ```bash
-python prosjekt_del_2/manage.py brukerhistorie 3
+python -m prosjekt_del_2.manage brukerhistorie 5
 ```
