@@ -1,5 +1,5 @@
 import sys
-from .miscellaneous import CommandManager
+from miscellaneous import CommandManager
 
 
 TEATER_ID = 1
