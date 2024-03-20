@@ -91,7 +91,7 @@ CREATE TABLE
 
 CREATE TABLE
     Billett (
-        BillettID INT PRIMARY KEY,
+        BillettID INTEGER PRIMARY KEY AUTOINCREMENT,
         Kolonnenummer SMALLINT NOT NULL,
         Radnummer SMALLINT NOT NULL,
         Områdenummer INT NOT NULL,
