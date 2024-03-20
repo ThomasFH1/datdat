@@ -89,6 +89,38 @@ class Populate:
                 raise Exception(
                     f"Ingen rader med mer enn {mengde} ledige seter!")
 
+    def hent_skuespillere():
+        with sqlite3.connect("Theatre.db") as con:
+            cursor = con.cursor()
+
+            query = """
+                SELECT Ansatt.Fornavn, Ansatt.Etternavn, Teaterstykke.Stykketittel, Rolle.Oppgavenavn 
+                FROM Ansatt
+                JOIN HarOppgaver ON Ansatt.AnsattID = HarOppgaver.AnsattID 
+                JOIN Rolle ON HarOppgaver.OppgaveID = Rolle.OppgaveID AND HarOppgaver.StykkeID = Rolle.StykkeID 
+                JOIN Teaterstykke ON Rolle.StykkeID = Teaterstykke.StykkeID
+            """
+            cursor.execute(query)
+            row = cursor.fetchall()
+            print("Navn på skuespillere og roller som opptrer i teaterstykkene:", row)
+
+    def best_solgte_forestillinger():
+        with sqlite3.connect("Theatre.db") as con:
+            cursor = con.cursor()
+
+            query = """
+            SELECT Stykketittel, Fremvisningstidspunkt, COUNT(BillettID) as AntallSolgteBilletter
+            FROM Fremvisning
+            JOIN Teaterstykke on Fremvisning.StykkeID = Teaterstykke.StykkeID
+            JOIN Billett on Fremvisning.FremvisningID = Billett.FremvisningID
+            GROUP BY Fremvisning.FremvisningID
+            ORDER BY AntallSolgteBilletter DESC
+            """
+            cursor.execute(query)
+            row = cursor.fetchall()
+            print(
+                "Dato og stykketittel på best solgte forestillinger, sortert i synkende rekkefølge:", row)
+
 
 TEATER_ID = 1
 DB_FILE_PATH = "Theatre.db"
@@ -101,3 +133,8 @@ if sys.argv[1] == "sett_inn_fremvisning":
 if sys.argv[1] == "kjøp_seter_samme_rad":
     populate.kjøp_seter_samme_rad(
         sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+
+if sys.argv[1] == "hent_skuespillere":
+    populate.hent_skuespillere()
+if sys.argv[1] == "best_solgte_forestillinger":
+    populate.best_solgte_forestillinger()
