@@ -136,7 +136,7 @@ CREATE TABLE
 
 CREATE TABLE
     Ansatt (
-        AnsattID INT PRIMARY KEY,
+        AnsattID INT AUTO_INCREMENT PRIMARY KEY,
         Personnummer INT NOT NULL UNIQUE,
         BrukerID INT NOT NULL UNIQUE,
         FOREIGN KEY (BrukerID) REFERENCES Bruker (BrukerID)

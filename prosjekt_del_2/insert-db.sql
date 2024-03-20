@@ -25,91 +25,92 @@ VALUES
 
 
 /*Setter inn skuespillere kongsemnene først som brukere, så ansatte*/
-INSERT INTO Bruker (BrukerID, Fornavn, Etternavn, Telefonnummer, Adresse)
+INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES 
-('1', 'Arturo', 'Scotti', '+47000001', 'Slottsplassen 1, 0010 Oslo'),
-('2', 'Haakon', 'Haakonssønn', '+47000002', 'Slottsplassen 1, 0010 Oslo'),
-('3', 'Ingunn Beate', 'Strige Øyen', '+47000003', 'Slottsplassen 1, 0010 Oslo'),
-('4', 'Hans Petter', 'Nilsen', '+47000004', 'Slottsplassen 1, 0010 Oslo'),
-('5', 'Madeleine Brandtzæg', 'Nilsen', '+47000005', 'Slottsplassen 1, 0010 Oslo'),
-('6', 'Synnøve Fossum', 'Eriksen', '+47000006', 'Slottsplassen 1, 0010 Oslo'),
-('7', 'Emma Caroline', 'Deichmann', '+47000007', 'Slottsplassen 1, 0010 Oslo'),
-('8', 'Thomas Jensen', 'Takyi', '+47000008', 'Slottsplassen 1, 0010 Oslo'),
-('9', 'Per Bogstad', 'Gulliksen', '+47000009', 'Slottsplassen 1, 0010 Oslo'),
-('10', 'Isak Holmen', 'Sørensen', '+47000010', 'Slottsplassen 1, 0010 Oslo'),
-('11', 'Fabian Heidelberg', 'Lunde', '+47000011', 'Slottsplassen 1, 0010 Oslo'),
-('12', 'Emil', 'Olafsson', '+47000012', 'Slottsplassen 1, 0010 Oslo'),
-('13', 'Snorre Ryen', 'Tøndel', '+47000013', 'Slottsplassen 1, 0010 Oslo');
+('Arturo', 'Scotti', '+47000001', 'Slottsplassen 1, 0010 Oslo'),
+('Haakon', 'Haakonssønn', '+47000002', 'Slottsplassen 1, 0010 Oslo'),
+('Ingunn Beate', 'Strige Øyen', '+47000003', 'Slottsplassen 1, 0010 Oslo'),
+('Hans Petter', 'Nilsen', '+47000004', 'Slottsplassen 1, 0010 Oslo'),
+('Madeleine Brandtzæg', 'Nilsen', '+47000005', 'Slottsplassen 1, 0010 Oslo'),
+('Synnøve Fossum', 'Eriksen', '+47000006', 'Slottsplassen 1, 0010 Oslo'),
+('Emma Caroline', 'Deichmann', '+47000007', 'Slottsplassen 1, 0010 Oslo'),
+('Thomas Jensen', 'Takyi', '+47000008', 'Slottsplassen 1, 0010 Oslo'),
+('Per Bogstad', 'Gulliksen', '+47000009', 'Slottsplassen 1, 0010 Oslo'),
+('Isak Holmen', 'Sørensen', '+47000010', 'Slottsplassen 1, 0010 Oslo'),
+('Fabian Heidelberg', 'Lunde', '+47000011', 'Slottsplassen 1, 0010 Oslo'),
+('Emil', 'Olafsson', '+47000012', 'Slottsplassen 1, 0010 Oslo'),
+('Snorre Ryen', 'Tøndel', '+47000013', 'Slottsplassen 1, 0010 Oslo');
 
 
-INSERT INTO Ansatt (AnsattID, Personnummer, BrukerID)
+INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
-(1, 00000000001, 1),
-(2, 00000000002, 2),
-(3, 00000000003, 3),
-(4, 00000000004, 4),
-(5, 00000000005, 5),
-(6, 00000000006, 6),
-(7, 00000000007, 7),
-(8, 00000000008, 8),
-(9, 00000000009, 9),
-(10, 00000000010, 10),
-(11, 00000000011, 11),
-(12, 00000000012, 12),
-(13, 00000000013, 13);
+(00000000001, 1),
+(00000000002, 2),
+(00000000003, 3),
+(00000000004, 4),
+(00000000005, 5),
+(00000000006, 6),
+(00000000007, 7),
+(00000000008, 8),
+(00000000009, 9),
+(00000000010, 10),
+(00000000011, 11),
+(00000000012, 12),
+(00000000013, 13);
 
 /*Setter inn skuespillere SAAEK først som brukere, så ansatte*/
-INSERT INTO Bruker (BrukerID, Fornavn, Etternavn, Telefonnummer, Adresse)
+INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES 
-('14', 'Sunniva Du Mond', 'Nordal', '+47000014', 'Slottsplassen 1, 0010 Oslo'),
-('15', 'Jo', 'Saberniak', '+47000015', 'Slottsplassen 1, 0010 Oslo'),
-('16', 'Marte M.', 'Steinholt', '+47000016', 'Slottsplassen 1, 0010 Oslo'),
-('17', 'Tor Ivar', 'Hagen', '+47000017', 'Slottsplassen 1, 0010 Oslo'),
-('18', 'Trond-Ove', 'Skrødal', '+47000018', 'Slottsplassen 1, 0010 Oslo'),
-('19', 'Natalie Grøndahl', 'Tangen', '+47000019', 'Slottsplassen 1, 0010 Oslo'),
-('20', 'Åsmund', 'Flaten', '+47000020', 'Slottsplassen 1, 0010 Oslo');
+('Sunniva Du Mond', 'Nordal', '+47000014', 'Slottsplassen 1, 0010 Oslo'),
+('Jo', 'Saberniak', '+47000015', 'Slottsplassen 1, 0010 Oslo'),
+('Marte M.', 'Steinholt', '+47000016', 'Slottsplassen 1, 0010 Oslo'),
+('Tor Ivar', 'Hagen', '+47000017', 'Slottsplassen 1, 0010 Oslo'),
+('Tor Ivar', 'Hagen', '+47000017', 'Slottsplassen 1, 0010 Oslo'),
+('Trond-Ove', 'Skrødal', '+47000018', 'Slottsplassen 1, 0010 Oslo'),
+('Natalie Grøndahl', 'Tangen', '+47000019', 'Slottsplassen 1, 0010 Oslo'),
+('Åsmund', 'Flaten', '+47000020', 'Slottsplassen 1, 0010 Oslo');
 
-INSERT INTO Ansatt (AnsattID, Personnummer, BrukerID)
+INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
-(14, '00000000014', 14),
-(15, '00000000015', 15),
-(16, '00000000016', 16),
-(17, '00000000017', 17),
-(18, '00000000018', 18),
-(19, '00000000019', 19),
-(20, '00000000020', 20);
+('00000000014', 14),
+('00000000015', 15),
+('00000000016', 16),
+('00000000017', 17),
+('00000000018', 18),
+('00000000019', 19),
+('00000000020', 20);
 
 /*Setter inn kunstnerisk lag til kongsemnene først som brukere, så ansatte*/
-INSERT INTO Bruker (BrukerID, Fornavn, Etternavn, Telefonnummer, Adresse)
+INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES 
-('21', 'Yury', 'Butusov', '+47000021', 'Slottsplassen 1, 0010 Oslo'),
-('22', 'Aleksandr', 'Shishkin-Hokusai', '+47000022', 'Slottsplassen 1, 0010 Oslo'),
-('23', 'Eivind', 'Myren', '+47000023', 'Slottsplassen 1, 0010 Oslo'),
-('24', 'Mina', 'Rype Stokke', '+47000024', 'Slottsplassen 1, 0010 Oslo');
+('Yury', 'Butusov', '+47000021', 'Slottsplassen 1, 0010 Oslo'),
+('Aleksandr', 'Shishkin-Hokusai', '+47000022', 'Slottsplassen 1, 0010 Oslo'),
+('Eivind', 'Myren', '+47000023', 'Slottsplassen 1, 0010 Oslo'),
+('Mina', 'Rype Stokke', '+47000024', 'Slottsplassen 1, 0010 Oslo');
 
-INSERT INTO Ansatt (AnsattID, Personnummer, BrukerID)
+INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
-(21, '00000000021', 21),
-(22, '00000000022', 22),
-(23, '00000000023', 23),
-(24, '00000000024', 24);
+('00000000021', 21),
+('00000000022', 22),
+('00000000023', 23),
+('00000000024', 24);
 
 /*Setter inn kunstnerisk lag til SAAEK først som brukere, så ansatte*/
-INSERT INTO Bruker (BrukerID, Fornavn, Etternavn, Telefonnummer, Adresse)
+INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES 
-('25', 'Jonas', 'Corell Petersen', '+47000025', 'Slottsplassen 1, 0010 Oslo'),
-('26', 'David', 'Gehrt', '+47000026', 'Slottsplassen 1, 0010 Oslo'),
-('27', 'Gaute', 'Tønder', '+47000027', 'Slottsplassen 1, 0010 Oslo'),
-('28', 'Magnus', 'Mikaelsen', '+47000028', 'Slottsplassen 1, 0010 Oslo'),
-('29', 'Kristoffer', 'Spender', '+47000029', 'Slottsplassen 1, 0010 Oslo');
+('Jonas', 'Corell Petersen', '+47000025', 'Slottsplassen 1, 0010 Oslo'),
+('David', 'Gehrt', '+47000026', 'Slottsplassen 1, 0010 Oslo'),
+('Gaute', 'Tønder', '+47000027', 'Slottsplassen 1, 0010 Oslo'),
+('Magnus', 'Mikaelsen', '+47000028', 'Slottsplassen 1, 0010 Oslo'),
+('Kristoffer', 'Spender', '+47000029', 'Slottsplassen 1, 0010 Oslo');
 
-INSERT INTO Ansatt (AnsattID, Personnummer, BrukerID)
+INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
-(25, '00000000025', 25),
-(26, '00000000026', 26),
-(27, '00000000027', 27),
-(28, '00000000028', 28),
-(29, '00000000029', 29);
+('00000000025', 25),
+('00000000026', 26),
+('00000000027', 27),
+('00000000028', 28),
+('00000000029', 29);
 
 /*Fremvisninger SAAEK, pass på at TeaterID og StykkeID er riktig*/
 INSERT INTO Fremvisning (Fremvisningstidspunkt, Salnavn, TeaterID, StykkeID)
@@ -168,3 +169,14 @@ VALUES
 (1, 2, 10), (5, 2, 10), -- Ragnhild i akt 1 og 5
 (1, 2, 11), (2, 2, 11), (3, 2, 11), (4, 2, 11), (5, 2, 11), -- Gregorius Jonsson i alle akter
 (1, 2, 12), (2, 2, 12), (3, 2, 12), (4, 2, 12), (5, 2, 12); -- Margrete i alle
+
+
+/*Brukerhistorie 3, fiktiv kunde*/
+INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
+VALUES
+('Kong', 'Harald', '+47000030', 'Kongens gate 1, 0153 Oslo');
+
+-- Insert the new user as a customer
+INSERT INTO Kunde (KundeID, BrukerID)
+VALUES
+(30, 30);
