@@ -1,5 +1,0 @@
-Ordinær: 450 
-Honnør: 380 
-Student: 280 
-Gruppe_10: 420 
-Gruppe_honnør 10: 

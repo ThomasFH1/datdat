@@ -1,6 +1,0 @@
-Ordinær: 350 
-Honnør: 300 
-Student: 220 
-Barn: 220
-Gruppe_10: 320
-Gruppe_honnør_10: 270 
