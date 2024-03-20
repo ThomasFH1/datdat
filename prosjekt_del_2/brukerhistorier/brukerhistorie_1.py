@@ -31,6 +31,7 @@ class Brukerhistorie1(Brukerhistorie):
                         (kolonnenummer, radnummer, områdenavn,
                          salnavn, self._teater_id)
             con.commit()
+
     def full_brukerhistorie(self):
         self.sett_inn_stoler("hovedscenen")
         self.sett_inn_stoler("gamle-scene")

@@ -20,13 +20,13 @@ class DBUtils:
                     "columns": column_names, "rows": table_data}
         return db_contents
 
-    def les_db(self, *tabeller):
+    def les_db(self, tabeller):
         """
         Test metode brukt til å lese databasen
         """
         db_contents = self._les_sqlite_db()
         for table, data in db_contents.items():
-            if table not in tabeller[0] and tabeller[0]:
+            if table not in tabeller and tabeller:
                 continue
             print(f"Table: {table}")
             print("Columns:", data["columns"])
