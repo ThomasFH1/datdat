@@ -139,6 +139,63 @@ VALUES
 ('Medvirkende', '2'),
 ('Kunstnerisk lag', '2');
 
+INSERT INTO Oppgave(OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
+VALUES
+(1, "Haakon Haakonssønn", 2, "Medvirkende"),
+(2, "Inga fra Varteig (Haakons mor)", 2, "Medvirkende"),
+(3, "Skule jarl", 2, "Medvirkende"),
+(4, "Fru Ragnhild (Skules hustru)", 2, "Medvirkende"),
+(5, "Margrete (Skules datter)", 2, "Medvirkende"),
+(6, "Sigrid (Skules søster)", 2, "Medvirkende"),
+(7, "Ingebjørg", 2, "Medvirkende"),
+(8, "Biskop Nikolas", 2, "Medvirkende"),
+(9, "Gregorius Jonssønn", 2, "Medvirkende"),
+(10, "Paal Flida", 2, "Medvirkende"),
+(11, "Baard Bratte", 2, "Medvirkende"),
+(12, "Jatgeir Skald", 2, "Medvirkende"),
+(13, "Dagfinn Bonde", 2, "Medvirkende"),
+(14, "Peter (prest og Ingebjørgs sønn)", 2, "Medvirkende"),
+(15, "Trønder", 2, "Medvirkende");
+
+INSERT INTO Rolle(OppgaveID, StykkeID, Oppgavenavn)
+VALUES
+(1, 2, "Haakon Haakonssønn"),
+(2, 2, "Inga fra Varteig (Haakons mor)"),
+(3, 2, "Skule jarl"),
+(4, 2, "Fru Ragnhild (Skules hustru)"),
+(5, 2, "Margrete (Skules datter)"),
+(6, 2, "Sigrid (Skules søster)"),
+(7, 2, "Ingebjørg"),
+(8, 2, "Biskop Nikolas"),
+(9, 2, "Gregorius Jonssønn"),
+(10, 2, "Paal Flida"),
+(11, 2, "Baard Bratte"),
+(12, 2, "Jatgeir Skald"),
+(13, 2, "Dagfinn Bonde"),
+(14, 2, "Peter (prest og Ingebjørgs sønn)"),
+(15, 2, "Trønder");
+
+/*Kongsemnene*/
+INSERT INTO HarOppgaver (AnsattID, OppgaveID, StykkeID)
+VALUES
+(1, 1, 2), -- Arturo Scotti som Haakon Haakonssønn
+(2, 2, 2), -- Ingunn Beate Strige Øyen som Inga fra Varteig
+(3, 3, 2), -- Hans Petter Nilsen som Skule jarl
+(4, 4, 2), -- Madeleine Brandtzæg Nilsen som Fru Ragnhild
+(5, 5, 2), -- Synnøve Fossum Eriksen som Margrete
+(6, 6, 2), -- Emma Caroline Deichmann som Sigrid (Skules søster)
+(6, 7, 2), -- Emma Caroline Deichmann som Ingebjørg (dobbeltrolle)
+(7, 8, 2), -- Thomas Jensen Takyi som Biskop Nikolas
+(8, 9, 2), -- Per Bogstad Gulliksen som Gregorius Jonssønn
+(9, 10, 2), -- Isak Holmen Sørensen som Paal Flida
+(9, 15, 2), -- Isak Holmen Sørensen som Trønder (dobbeltrolle)
+(10, 11, 2), -- Fabian Heidelberg Lunde som Baard Bratte
+(10, 15, 2), -- Fabian Heidelberg Lunde som Trønder (dobbeltrolle)
+(11, 12, 2), -- Emil Olafsson som Jatgeir Skald
+(11, 13, 2), -- Emil Olafsson som Dagfinn Bonde (dobbeltrolle)
+(12, 14, 2); -- Snorre Ryen Tøndel som Peter (prest og Ingebjørgs sønn)
+
+
 
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
