@@ -1,7 +1,8 @@
 import sqlite3
+from .brukerhistorie import Brukerhistorie
 
 
-class Brukerhistorie2:
+class Brukerhistorie2(Brukerhistorie):
     @staticmethod
     def _les_sal(salfil):
         områder = {}
@@ -17,10 +18,6 @@ class Brukerhistorie2:
                               for seat in line.strip().replace("x", "")]
                     områder[last_område].append(ny_rad)
         return områder, dato
-
-    def __init__(self, teater_id, db_file_path):
-        self._teater_id = teater_id
-        self._db_file_path = db_file_path
 
     def _sett_inn_billett(self, kolonnenummer, radnummer, områdenummer, salnavn, dato, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:

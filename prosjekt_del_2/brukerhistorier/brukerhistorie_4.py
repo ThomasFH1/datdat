@@ -1,11 +1,8 @@
 import sqlite3
+from .brukerhistorie import Brukerhistorie
 
 
-class Brukerhistorie4:
-    def __init__(self, teater_id, db_file_path):
-        self._teater_id = teater_id
-        self._db_file_path = db_file_path
-
+class Brukerhistorie4(Brukerhistorie):
     def hent_forestillinger(self):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()

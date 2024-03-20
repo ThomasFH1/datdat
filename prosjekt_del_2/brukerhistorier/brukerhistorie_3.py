@@ -1,10 +1,8 @@
 import sqlite3
+from .brukerhistorie import Brukerhistorie
 
 
-class Brukerhistorie3:
-    def __init__(self, teater_id, db_file_path):
-        self._teater_id = teater_id
-        self._db_file_path = db_file_path
+class Brukerhistorie3(Brukerhistorie):
 
     def hent_ledige_rader(self, mengde, fremvisningstidspunkt, salnavn, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:
@@ -35,7 +33,7 @@ class Brukerhistorie3:
             return ledige_rader
 
     def utfør_kjøp(self, stoler, fremvisningstidspunkt, salnavn, stykke_id):
-        #TODO
+        # TODO
         insert_query = """
                         INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID)
                         VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -50,7 +48,7 @@ class Brukerhistorie3:
                 )
 
     def full_brukerhistorie(self):
-        #TODO
+        # TODO
         pass
 
 

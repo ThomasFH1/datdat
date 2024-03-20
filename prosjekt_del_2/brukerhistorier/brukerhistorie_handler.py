@@ -7,39 +7,23 @@ from .brukerhistorie_6 import Brukerhistorie6
 
 class BrukerhistorieHandler:
     def __init__(self, teater_id, db_file_path):
-        self.brukerhistorie_2_instance = Brukerhistorie2(
-            teater_id, db_file_path)
-        self.brukerhistorie_3_instance = Brukerhistorie3(
-            teater_id, db_file_path)
-        self.brukerhistorie_4_instance = Brukerhistorie4(
-            teater_id, db_file_path)
-        self.brukerhistorie_5_instance = Brukerhistorie5(
-            teater_id, db_file_path)
-        self.brukerhistorie_6_instance = Brukerhistorie6(
-            teater_id, db_file_path)
+        self.brukerhistorier = {
+            2: Brukerhistorie2(teater_id, db_file_path),
+            3: Brukerhistorie3(teater_id, db_file_path),
+            4: Brukerhistorie4(teater_id, db_file_path),
+            5: Brukerhistorie5(teater_id, db_file_path),
+            6: Brukerhistorie6(teater_id, db_file_path),
+        }
 
-    def brukerhistorie(self, historienummer):
-        """
-        Metode som kjører alle metoder som kreves for en gitt brukerhistorie
-        """
+    def brukerhistorier(self, historienummer):
         try:
             historienummer = int(historienummer)
-        except:
-            raise Exception("Brukerhistorienummer må være et heltall")
-        if 1 <= historienummer <= 7:
-            raise Exception("Brukerhistorienummer må være fra 1 til og med 7")
+        except ValueError:
+            raise ValueError("Brukerhistorienummer må være et heltall")
 
-        if historienummer == 1:
-            pass
-        elif historienummer == 2:
-            self.brukerhistorie_2_instance.full_brukerhistorie()
-        elif historienummer == 3:
-            self.brukerhistorie_3_instance.full_brukerhistorie()
-        elif historienummer == 4:
-            self.brukerhistorie_4_instance.full_brukerhistorie()
-        elif historienummer == 5:
-            self.brukerhistorie_5_instance.full_brukerhistorie()
-        elif historienummer == 6:
-            self.brukerhistorie_6_instance.full_brukerhistorie()
-        elif historienummer == 7:
-            pass
+        if historienummer not in self.brukerhistorier:
+            raise ValueError(
+                "Ugyldig brukerhistorienummer. Gyldige verdier er 2 til 6.")
+
+        brukerhistorie = self.brukerhistorier[historienummer]
+        brukerhistorie.full_brukerhistorie()
