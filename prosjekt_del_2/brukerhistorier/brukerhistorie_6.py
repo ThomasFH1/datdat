@@ -1,0 +1,34 @@
+import sqlite3
+
+
+class Brukerhistorie6:
+    def __init__(self, teater_id, db_file_path):
+        self._teater_id = teater_id
+        self._db_file_path = db_file_path
+
+    def best_solgte_forestillinger(self):
+        with sqlite3.connect(self._db_file_path) as con:
+            cursor = con.cursor()
+
+            query = """
+            SELECT Stykketittel, Fremvisningstidspunkt, COUNT(BillettID) as AntallSolgteBilletter
+            FROM Fremvisning
+            JOIN Teaterstykke on Fremvisning.StykkeID = Teaterstykke.StykkeID
+            JOIN Billett on Fremvisning.FremvisningID = Billett.FremvisningID
+            GROUP BY Fremvisning.FremvisningID
+            ORDER BY AntallSolgteBilletter DESC
+            """
+            cursor.execute(query)
+            row = cursor.fetchall()
+            print(
+                "Dato og stykketittel på best solgte forestillinger, sortert i synkende rekkefølge:", row)
+
+    def full_brukerhistorie(self):
+        self.best_solgte_forestillinger
+
+
+if __name__ == "__main__":
+    TEATER_ID = 1
+    DB_FILE_PATH = "Theatre.db"
+    populate = Brukerhistorie6(TEATER_ID, DB_FILE_PATH)
+    populate.full_brukerhistorie()
