@@ -35,7 +35,7 @@ class Brukerhistorie7(Brukerhistorie):
             for resultat in resultater:
                 if resultat[2] != current_stykke:
                     if current_stykke != "":
-                        print("\n")  # Legger til et ekstra linjeskift mellom stykkene
+                        print("\n")
                     current_stykke = resultat[2]
                     print(f"'{current_stykke}':")
                 print(f"  - {resultat[0]} {resultat[1]}")
