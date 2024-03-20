@@ -21,7 +21,7 @@ VALUES
 /*Akter SAAEK - akt ikke oppgitt, antar bare en akt*/
 INSERT INTO Akt (Aktnummer, StykkeID, Aktnavn)
 VALUES 
-(1, 1, 'akt_1'),
+(1, 1, 'akt_1');
 
 
 /*Setter inn skuespillere kongsemnene først som brukere, så ansatte*/
