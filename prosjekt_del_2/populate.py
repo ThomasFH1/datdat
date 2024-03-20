@@ -95,7 +95,7 @@ DB_FILE_PATH = "Theatre.db"
 populate = Populate(TEATER_ID, DB_FILE_PATH)
 if sys.argv[1] == "sett_inn_stykke":
     populate.sett_inn_stykke(sys.argv[2], sys.argv[3])
-if sys.argv[1] == "populate_fremvisning":
+if sys.argv[1] == "sett_inn_fremvisning":
     populate.sett_inn_fremvisning(sys.argv[2], sys.argv[3])
 
 if sys.argv[1] == "kjøp_seter_samme_rad":
