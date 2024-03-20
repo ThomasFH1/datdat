@@ -288,3 +288,14 @@ VALUES
 
 INSERT INTO BillettPris (Prisgruppe, StykkeID, Pris, Minimumsantall)
 VALUES
+("Ordinær", 2, 450, 1),
+("Honnør", 2, 380, 1),
+("Student", 2, 280, 1),
+("Gruppe 10", 2, 420, 10),
+("Gruppe honnør 10", 2, 360, 10),
+("Ordinær", 1, 350, 1),
+("Honnør", 1, 300, 1),
+("Student", 1, 220, 1),
+("Barn", 1, 220, 1),
+("Gruppe 10", 1, 320, 10),
+("Gruppe honnør 10", 1, 270, 10);
