@@ -1,24 +1,9 @@
 import sqlite3
 from .brukerhistorie import Brukerhistorie
+from ..miscellaneous.les_salfil import les_salfil
 
 
 class Brukerhistorie2(Brukerhistorie):
-    @staticmethod
-    def _les_sal(salfil):
-        områder = {}
-        with open(salfil, "r") as f:
-            dato = f.readline().strip()
-
-            for line in f:
-                if not line[0].isdigit():
-                    last_område = line.strip()
-                    områder[last_område] = []
-                else:
-                    ny_rad = [int(seat)
-                              for seat in line.strip().replace("x", "")]
-                    områder[last_område].append(ny_rad)
-        return områder, dato
-
     def _sett_inn_billett(self, kolonnenummer, radnummer, områdenummer, salnavn, dato, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
@@ -40,7 +25,7 @@ class Brukerhistorie2(Brukerhistorie):
             con.commit()
 
     def sett_inn_billetter_til_fremvisning(self, sal_filnavn, stykke_id):
-        områder, dato = self._les_sal(f"{sal_filnavn}.txt")
+        områder, dato = les_salfil(f"{sal_filnavn}.txt")
         salnavn = " ".join([word.capitalize()
                             for word in sal_filnavn.split("-")])
 
