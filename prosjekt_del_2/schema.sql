@@ -99,6 +99,7 @@ CREATE TABLE
         TeaterID INT NOT NULL,
         Fremvisningstidspunkt DATETIME NOT NULL,
         StykkeID INT NOT NULL,
+        Prisgruppe VARCHAR(128) NOT NULL,
         FOREIGN KEY (
             Kolonnenummer,
             Radnummer,
@@ -121,6 +122,10 @@ CREATE TABLE
             Fremvisningstidspunkt,
             Salnavn,
             TeaterID,
+            StykkeID
+        ),
+        FOREIGN KEY BillettPris(
+            Prisgruppe,
             StykkeID
         )
     );
