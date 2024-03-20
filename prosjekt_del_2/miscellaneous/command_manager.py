@@ -36,6 +36,11 @@ class CommandManager(BrukerhistorieHandler):
         db_utils_instance.les_db(tabeller)
 
     @cmd
+    def load_initial_data(self):
+        db_utils_instance = DBUtils(self._db_file_path)
+        db_utils_instance.load_intial_data()
+
+    @cmd
     def brukerhistorier(self, brukerhistorienummer):
         self._brukerhistorie_handler_instance.brukerhistorier(
             brukerhistorienummer)
