@@ -124,10 +124,13 @@ CREATE TABLE
             TeaterID,
             StykkeID
         ),
-        FOREIGN KEY BillettPris(
+        FOREIGN KEY (
             Prisgruppe,
             StykkeID
-        )
+        ) REFERENCES BillettPris (
+        Prisgruppe,
+        StykkeID
+        Pris
     );
 
 CREATE TABLE
