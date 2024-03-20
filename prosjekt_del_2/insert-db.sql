@@ -28,7 +28,6 @@ VALUES
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES 
 ('Arturo', 'Scotti', '+47000001', 'Slottsplassen 1, 0010 Oslo'),
-('Haakon', 'Haakonssønn', '+47000002', 'Slottsplassen 1, 0010 Oslo'),
 ('Ingunn Beate', 'Strige Øyen', '+47000003', 'Slottsplassen 1, 0010 Oslo'),
 ('Hans Petter', 'Nilsen', '+47000004', 'Slottsplassen 1, 0010 Oslo'),
 ('Madeleine Brandtzæg', 'Nilsen', '+47000005', 'Slottsplassen 1, 0010 Oslo'),
@@ -56,7 +55,6 @@ VALUES
 (00000000010, 10),
 (00000000011, 11),
 (00000000012, 12),
-(00000000013, 13);
 
 /*Setter inn skuespillere SAAEK først som brukere, så ansatte*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
@@ -72,13 +70,13 @@ VALUES
 
 INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
-('00000000014', 14),
-('00000000015', 15),
-('00000000016', 16),
-('00000000017', 17),
-('00000000018', 18),
-('00000000019', 19),
-('00000000020', 20);
+('00000000014', 13),
+('00000000015', 14),
+('00000000016', 15),
+('00000000017', 16),
+('00000000018', 17),
+('00000000019', 18),
+('00000000020', 19);
 
 /*Setter inn kunstnerisk lag til kongsemnene først som brukere, så ansatte*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
@@ -90,10 +88,10 @@ VALUES
 
 INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
-('00000000021', 21),
-('00000000022', 22),
-('00000000023', 23),
-('00000000024', 24);
+('00000000021', 20),
+('00000000022', 21),
+('00000000023', 22),
+('00000000024', 23);
 
 /*Setter inn kunstnerisk lag til SAAEK først som brukere, så ansatte*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
@@ -106,11 +104,11 @@ VALUES
 
 INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
-('00000000025', 25),
-('00000000026', 26),
-('00000000027', 27),
-('00000000028', 28),
-('00000000029', 29);
+('00000000025', 24),
+('00000000026', 25),
+('00000000027', 26),
+('00000000028', 27),
+('00000000029', 28);
 
 /*Fremvisninger SAAEK, pass på at TeaterID og StykkeID er riktig*/
 INSERT INTO Fremvisning (Fremvisningstidspunkt, Salnavn, TeaterID, StykkeID)
@@ -138,22 +136,6 @@ VALUES
 ('Medvirkende', '2'),
 ('Kunstnerisk lag', '2');
 
-INSERT INTO Oppgaver (OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
-VALUES 
-(1, 'Håkon Håkonson', 2, 'Medvirkende'),
-(2, 'Dagfinn Bonde', 2, 'Medvirkende'),
-(3, 'Jatgeir Skald', 2, 'Medvirkende'),
-(4, 'Sigrid', 2, 'Medvirkende'),
-(5, 'Ingeborg', 2, 'Medvirkende'),
-(6, 'Guttorm Ingesson', 2, 'Medvirkende'),
-(7, 'Skule Jarl', 2, 'Medvirkende'),
-(8, 'Inga frå Varteig', 2, 'Medvirkende'),
-(9, 'Paal Flida', 2, 'Medvirkende'),
-(10, 'Ragnhild', 2, 'Medvirkende'),
-(11, 'Gregorius Jonsson', 2, 'Medvirkende'),
-(12, 'Margrete', 2, 'Medvirkende'),
-(13, 'Biskop Nikolas', 2, 'Medvirkende'),
-(14, 'Peter', 2, 'Medvirkende');
 
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
