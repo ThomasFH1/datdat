@@ -247,6 +247,7 @@ VALUES
 (27, 30, 1), -- Magnus Mikaelsen har ansvar for lysdesign
 (28, 31, 1); -- Kristoffer Spender har ansvar for dramaturgi
 
+/*Deltakelse i akter kongsemnene*/
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
 (1, 2, 1), (2, 2, 1), (3, 2, 1), (4, 2, 1), (5, 2, 1),

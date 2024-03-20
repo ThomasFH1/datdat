@@ -1,7 +1,7 @@
 import sqlite3
 
 def finn_skuespillere_som_spilt_sammen(fornavn: str, etternavn: str):
-    conn = sqlite3.connect('Theatre.db')  # Oppdaterer med din faktiske database
+    conn = sqlite3.connect('Theatre.db')
     cur = conn.cursor()
 
     sql = """
@@ -43,4 +43,4 @@ def finn_skuespillere_som_spilt_sammen(fornavn: str, etternavn: str):
     conn.close()
 
 # Eksempel på bruk
-finn_skuespillere_som_spilt_sammen('Snorre Ryen', 'Tøndel')
+finn_skuespillere_som_spilt_sammen('Hans Petter', 'Nilsen')
