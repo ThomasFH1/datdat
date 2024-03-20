@@ -84,7 +84,7 @@ CREATE TABLE
         Prisgruppe VARCHAR(128) NOT NULL,
         StykkeID INT NOT NULL,
         Pris SMALLINT NOT NULL,
-        Minimumsantall SMALLINT NOT NULL CHECK(Minimumsantall >= 1),
+        Minimumsantall SMALLINT NOT NULL CHECK (Minimumsantall >= 1),
         PRIMARY KEY (Prisgruppe, StykkeID),
         FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE
     );
@@ -124,13 +124,7 @@ CREATE TABLE
             TeaterID,
             StykkeID
         ),
-        FOREIGN KEY (
-            Prisgruppe,
-            StykkeID
-        ) REFERENCES BillettPris (
-        Prisgruppe,
-        StykkeID
-        Pris
+        FOREIGN KEY (Prisgruppe, StykkeID) REFERENCES BillettPris (Prisgruppe, StykkeID)
     );
 
 CREATE TABLE
@@ -161,7 +155,7 @@ CREATE TABLE
     Kjøp (
         KjøpID INT PRIMARY KEY,
         KundeID INT NOT NULL,
-        BillettID INT NOT NULL  UNIQUE,
+        BillettID INT NOT NULL UNIQUE,
         Kjøpstidspunkt DATETIME NOT NULL,
         FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID),
         FOREIGN KEY (BillettID) REFERENCES Billett (BillettID)
@@ -181,9 +175,7 @@ CREATE TABLE
         Oppgavenavn VARCHAR(128) NOT NULL,
         StykkeID INT NOT NULL,
         Lagnavn VARCHAR(128) NOT NULL,
-        PRIMARY KEY (OppgaveID, StykkeID)
-        FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE
-        FOREIGN KEY (Lagnavn, StykkeID) REFERENCES Lag(Lagnavn, StykkeID)
+        PRIMARY KEY (OppgaveID, StykkeID) FOREIGN KEY (StykkeID) REFERENCES Teaterstykke (StykkeID) ON UPDATE CASCADE ON DELETE CASCADE FOREIGN KEY (Lagnavn, StykkeID) REFERENCES Lag (Lagnavn, StykkeID)
     );
 
 CREATE TABLE
@@ -191,40 +183,35 @@ CREATE TABLE
         OppgaveID INT,
         StykkeID INT NOT NULL,
         Oppgavenavn VARCHAR(128) NOT NULL,
-        PRIMARY KEY (OppgaveID, StykkeID)
-        FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Oppgaver(OppgaveID, StykkeID)
-
+        PRIMARY KEY (OppgaveID, StykkeID) FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Oppgaver (OppgaveID, StykkeID)
     );
 
 CREATE TABLE
     Deltar (
         Aktnummer SMALLINT NOT NULL,
-        StykkeID INT NOT NULL, 
+        StykkeID INT NOT NULL,
         OppgaveID INT NOT NULL,
-        PRIMARY KEY (Aktnummer, StykkeID, OppgaveID) 
-        FOREIGN KEY (Aktnummer, StykkeID) REFERENCES Akt(Aktnummer, StykkeID)
-        FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Rolle(OppgaveID, StykkeID)
+        PRIMARY KEY (Aktnummer, StykkeID, OppgaveID) FOREIGN KEY (Aktnummer, StykkeID) REFERENCES Akt (Aktnummer, StykkeID) FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Rolle (OppgaveID, StykkeID)
     );
 
 CREATE TABLE
     Status (Statusnavn VARCHAR(128) PRIMARY KEY);
 
-CREATE TABLE Kontrakt (
-    KontraktID INTEGER PRIMARY KEY,
-    Signeringsdato DATE NOT NULL,
-    Statusnavn VARCHAR(128) NOT NULL,
-    KontraktType VARCHAR(50) NOT NULL,
-    FOREIGN KEY (Statusnavn) REFERENCES Status (Statusnavn),
-    CHECK (KontraktType IN ('Ansatt', 'Direktør'))
-);
-
+CREATE TABLE
+    Kontrakt (
+        KontraktID INTEGER PRIMARY KEY,
+        Signeringsdato DATE NOT NULL,
+        Statusnavn VARCHAR(128) NOT NULL,
+        KontraktType VARCHAR(50) NOT NULL,
+        FOREIGN KEY (Statusnavn) REFERENCES Status (Statusnavn),
+        CHECK (KontraktType IN ('Ansatt', 'Direktør'))
+    );
 
 CREATE TABLE
     Direktørkontrakt (
         DirektørkontraktID INTEGER,
         TeaterID INT NOT NULL UNIQUE,
-        FOREIGN KEY (TeaterID) REFERENCES Teater(TeaterID)
-        FOREIGN KEY (DirektørkontraktID) REFERENCES Kontrakt (KontraktID)
+        FOREIGN KEY (TeaterID) REFERENCES Teater (TeaterID) FOREIGN KEY (DirektørkontraktID) REFERENCES Kontrakt (KontraktID)
     );
 
 CREATE TABLE
@@ -232,20 +219,20 @@ CREATE TABLE
         AnsattkontraktID INTEGER,
         TeaterID INT NOT NULL,
         Jobbtittel VARCHAR(128) NOT NULL,
-        FOREIGN KEY (TeaterID) REFERENCES Teater(TeaterID),
+        FOREIGN KEY (TeaterID) REFERENCES Teater (TeaterID),
         FOREIGN KEY (AnsattkontraktID) REFERENCES Kontrakt (KontraktID),
-        FOREIGN KEY (Jobbtittel) REFERENCES Jobbtittel(Jobbtittel)
+        FOREIGN KEY (Jobbtittel) REFERENCES Jobbtittel (Jobbtittel)
     );
 
 CREATE TABLE
     Jobbtittel (Jobbtittel VARCHAR(128) NOT NULL);
 
-CREATE TABLE 
+CREATE TABLE
     HarOppgaver (
         AnsattID INT NOT NULL,
         OppgaveID INT NOT NULL,
-        StykkeID INT NOT NULL, 
+        StykkeID INT NOT NULL,
         PRIMARY KEY (AnsattID, OppgaveID),
-        FOREIGN KEY (AnsattID) REFERENCES Ansatt(AnsattID),
-        FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Oppgaver(OppgaveID, StykkeID)
+        FOREIGN KEY (AnsattID) REFERENCES Ansatt (AnsattID),
+        FOREIGN KEY (OppgaveID, StykkeID) REFERENCES Oppgaver (OppgaveID, StykkeID)
     );
