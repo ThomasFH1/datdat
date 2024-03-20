@@ -271,13 +271,12 @@ VALUES
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
 (1, 1, 20), 
-/*(1, 1, 21),*/
+(2, 1, 21),
 (1, 1, 22), 
 (1, 1, 23), 
-(1, 1, 24),
+(2, 1, 24),
 (1, 1, 25),
-(1, 1, 26),
-(2,1,21);
+(1, 1, 26);
 
 /*Brukerhistorie 3, fiktiv kunde*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
