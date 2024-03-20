@@ -47,6 +47,10 @@ class CommandManager(BrukerhistorieHandler):
 
     #  ↓ Alle metoder som brukes innad i brukerhistoriene dersom bruker ønsker å kjøre dem selv
     #  ↓ Trengs strengt tatt ikke til oppgaven
+    @cmd
+    def sett_inn_stoler(self, sal_filnavn):
+        brukerhistorie = self._brukerhistorie_handler_instance.brukerhistorier[1]
+        brukerhistorie.sett_inn_stoler(sal_filnavn)
 
     @cmd
     def sett_inn_billetter_til_fremvisning(self, sal_filnavn, stykke_id):
