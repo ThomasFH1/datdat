@@ -35,7 +35,7 @@ class Brukerhistorie7(Brukerhistorie):
             for resultat in resultater:
                 if resultat[2] != current_stykke:
                     if current_stykke != "":
-                        print("\n")  # Legger til et ekstra linjeskift mellom stykkene
+                        print("\n")
                     current_stykke = resultat[2]
                     print(f"'{current_stykke}':")
                 print(f"  - {resultat[0]} {resultat[1]}")
@@ -47,9 +47,10 @@ class Brukerhistorie7(Brukerhistorie):
 
 
     def full_brukerhistorie(self):
-        skuespillere = []
-        for skuespillernavn in skuespillere:
-            self.finn_medskuespillere(self, skuespillernavn)
+        fornavn = input("Fornavn:")
+        etternavn= input("Etternavn:")
+        self.finn_skuespillere_som_spilt_sammen(fornavn, etternavn)
+
 
 
 if __name__ == "__main__":
