@@ -58,7 +58,7 @@ VALUES
 (00000000012, 12);
 
 /*Setter inn skuespillere SAAEK først som brukere, så ansatte*/
-/*Brukeremed BrukerID 13-19*/
+/*Brukere med BrukerID 13-19*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES 
 ('Sunniva Du Mond', 'Nordal', '+47000014', 'Slottsplassen 1, 0010 Oslo'),
@@ -134,10 +134,10 @@ VALUES
 /*Lagene til begge teaterstykker */
 INSERT INTO Lag (Lagnavn, StykkeID)
 VALUES 
-('Medvirkende', '1'),
-('Kunstnerisk lag', '1'),
-('Medvirkende', '2'),
-('Kunstnerisk lag', '2');
+('Medvirkende', 1),
+('Kunstnerisk lag', 1),
+('Medvirkende', 2),
+('Kunstnerisk lag', 2);
 
 /* Oppgaver til kongsemnene */
 INSERT INTO Oppgaver (OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
@@ -156,11 +156,12 @@ VALUES
 (12, "Jatgeir Skald", 2, "Medvirkende"),
 (13, "Dagfinn Bonde", 2, "Medvirkende"),
 (14, "Peter (prest og Ingebjørgs sønn)", 2, "Medvirkende"),
-(15, "Trønder", 2, "Medvirkende");
+(15, "Trønder", 2, "Medvirkende"),
 (16, 'Regi og musikkutvelgelse', 2, 'Kunstnerisk lag'),
 (17, 'Scenografi og kostymer', 2, 'Kunstnerisk lag'),
 (18, 'Lysdesign', 2, 'Kunstnerisk lag'),
 (19, 'Dramaturg', 2, 'Kunstnerisk lag');
+
 
 /* Roller i kongsemnene */
 INSERT INTO Rolle(OppgaveID, StykkeID, Oppgavenavn)
@@ -214,9 +215,9 @@ VALUES
 (23, 'Tor Ivar Hagen', 1, 'Medvirkende'),
 (24, 'Trond-Ove Skrødal', 1, 'Medvirkende'),
 (25, 'Natalie Grøndahl Tangen', 1, 'Medvirkende'),
-(26, 'Åsmund Flaten', '+47000020', 1, 'Medvirkende'),
+(26, 'Åsmund Flaten', 1, 'Medvirkende'),
 (27, 'Regi', 1, 'Kunstnerisk lag'),
-(28. 'Scenografi og kostymer', 1, 'Kunstnerisk lag'),
+(28, 'Scenografi og kostymer', 1, 'Kunstnerisk lag'),
 (29, 'Musikalsk ansvarlig', 1, 'Kunstnerisk lag'),
 (30, 'Lysdesign', 1, 'Kunstnerisk lag'),
 (31, 'Dramaturg', 1, 'Kunstnerisk lag');
