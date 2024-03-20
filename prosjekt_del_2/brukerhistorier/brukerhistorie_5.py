@@ -1,6 +1,7 @@
 import sqlite3
 from .brukerhistorie import Brukerhistorie
 
+
 class Brukerhistorie5(Brukerhistorie):
     def hent_skuespillere(self):
         with sqlite3.connect(self._db_file_path) as con:
