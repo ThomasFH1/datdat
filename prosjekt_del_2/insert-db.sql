@@ -136,3 +136,35 @@ VALUES
 ('Kunstnerisk lag', '1'),
 ('Medvirkende', '2'),
 ('Kunstnerisk lag', '2');
+
+INSERT INTO Oppgaver (OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
+VALUES 
+(1, 'Håkon Håkonson', 2, 'Medvirkende'),
+(2, 'Dagfinn Bonde', 2, 'Medvirkende'),
+(3, 'Jatgeir Skald', 2, 'Medvirkende'),
+(4, 'Sigrid', 2, 'Medvirkende'),
+(5, 'Ingeborg', 2, 'Medvirkende'),
+(6, 'Guttorm Ingesson', 2, 'Medvirkende'),
+(7, 'Skule Jarl', 2, 'Medvirkende'),
+(8, 'Inga frå Varteig', 2, 'Medvirkende'),
+(9, 'Paal Flida', 2, 'Medvirkende'),
+(10, 'Ragnhild', 2, 'Medvirkende'),
+(11, 'Gregorius Jonsson', 2, 'Medvirkende'),
+(12, 'Margrete', 2, 'Medvirkende'),
+(13, 'Biskop Nikolas', 2, 'Medvirkende'),
+(14, 'Peter', 2, 'Medvirkende');
+
+INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
+VALUES 
+(1, 2, 1), (2, 2, 1), (3, 2, 1), (4, 2, 1), (5, 2, 1), -- Håkon Håkonson i alle akter
+(1, 2, 2), (2, 2, 2), (3, 2, 2), (4, 2, 2), (5, 2, 2), -- Dagfinn Bonde i alle akter
+(4, 2, 3), -- Jatgeir Skald i akt 4
+(1, 2, 4), (2, 2, 4), (5, 2, 4), -- Sigrid i aktene 1, 2 og 5
+(4, 2, 5), -- Ingeborg i akt 4
+(1, 2, 6), -- Guttorm Ingesson i akt 1
+(1, 2, 7), (2, 2, 7), (3, 2, 7), (4, 2, 7), (5, 2, 7), -- Skule Jarl i alle akter
+(1, 2, 8), (3, 2, 8), -- Inga frå Varteig i akt 1 og 3
+(1, 2, 9), (2, 2, 9), (3, 2, 9), (4, 2, 9), (5, 2, 9), -- Paal Flida i alle akter
+(1, 2, 10), (5, 2, 10), -- Ragnhild i akt 1 og 5
+(1, 2, 11), (2, 2, 11), (3, 2, 11), (4, 2, 11), (5, 2, 11), -- Gregorius Jonsson i alle akter
+(1, 2, 12), (2, 2, 12), (3, 2, 12), (4, 2, 12), (5, 2, 12), -- Margrete i alle

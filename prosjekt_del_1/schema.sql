@@ -220,10 +220,6 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    Jobbtittel (
-        Jobbtittel VARCHAR(128) NOT NULL);
-
-CREATE TABLE
     AnsattKontrakt (
         AnsattkontraktID INTEGER,
         TeaterID INT NOT NULL,
@@ -232,6 +228,9 @@ CREATE TABLE
         FOREIGN KEY (AnsattkontraktID) REFERENCES Kontrakt (KontraktID),
         FOREIGN KEY (Jobbtittel) REFERENCES Jobbtittel(Jobbtittel)
     );
+
+CREATE TABLE
+    Jobbtittel (Jobbtittel VARCHAR(128) NOT NULL);
 
 CREATE TABLE 
     HarOppgaver (
