@@ -58,7 +58,7 @@ class Populater:
         return db_contents
 
     @cmd_handler
-    def les_db(self, tabeller):
+    def les_db(self, *tabeller):
         db_contents = self._les_sqlite_db()
 
         for table, data in db_contents.items():
