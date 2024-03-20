@@ -8,15 +8,17 @@ class Brukerhistorie4(Brukerhistorie):
             cursor = con.cursor()
 
             query = """
-            SELECT Stykketittel, Fremvisningstidspunkt, COUNT(BillettID) as AntallSolgteBilletter
+            SELECT Stykketittel, Fremvisning.Fremvisningstidspunkt, COUNT(BillettID) as AntallSolgteBilletter
             FROM Fremvisning
             JOIN Teaterstykke on Fremvisning.StykkeID = Teaterstykke.StykkeID
-            JOIN Billett on Fremvisning.FremvisningID = Billett.FremvisningID
-            GROUP BY Fremvisning.FremvisningID
+            LEFT JOIN Billett on Fremvisning.Fremvisningstidspunkt = Billett.Fremvisningstidspunkt
+            GROUP BY Fremvisning.Fremvisningstidspunkt, Fremvisning.StykkeID, Fremvisning.Salnavn, Fremvisning.TeaterID
             """
             cursor.execute(query)
             row = cursor.fetchall()
-            print("Dato og stykketittel på best solgte forestillinger", row)
+            print("Dato og stykketittel på forestillinger")
+            for fremvisning in row:
+                print(fremvisning)
 
     def full_brukerhistorie(self):
         self.hent_forestillinger()

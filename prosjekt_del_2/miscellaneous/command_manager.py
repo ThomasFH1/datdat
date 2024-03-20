@@ -1,4 +1,4 @@
-from ..brukerhistorier import BrukerhistorieHandler
+from brukerhistorier import BrukerhistorieHandler
 from .db_utils import DBUtils
 
 
@@ -39,6 +39,16 @@ class CommandManager(BrukerhistorieHandler):
     def load_initial_data(self):
         db_utils_instance = DBUtils(self._db_file_path)
         db_utils_instance.load_intial_data()
+
+    @cmd
+    def configure_db(self):
+        db_utils_instance = DBUtils(self._db_file_path)
+        db_utils_instance.configure_db()
+
+    @cmd
+    def reset_db(self):
+        db_utils_instance = DBUtils(self._db_file_path)
+        db_utils_instance.reset_db()
 
     @cmd
     def brukerhistorie(self, brukerhistorienummer):

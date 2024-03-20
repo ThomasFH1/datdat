@@ -1,6 +1,6 @@
 import sqlite3
 from .brukerhistorie import Brukerhistorie
-from ..miscellaneous.les_salfil import les_salfil
+from miscellaneous.les_salfil import les_salfil
 
 
 class Brukerhistorie1(Brukerhistorie):
@@ -27,9 +27,11 @@ class Brukerhistorie1(Brukerhistorie):
                     )
                     for j, status in enumerate(rad):
                         kolonnenummer = j + 1
-                        "INSERT INTO Stol VALUES (?, ?, ?, ?, ?)",
-                        (kolonnenummer, radnummer, områdenavn,
-                         salnavn, self._teater_id)
+                        cursor.execute(
+                            "INSERT INTO Stol VALUES (?, ?, ?, ?, ?)",
+                            (kolonnenummer, radnummer, områdenummer,
+                             salnavn, self._teater_id)
+                        )
             con.commit()
 
     def full_brukerhistorie(self):

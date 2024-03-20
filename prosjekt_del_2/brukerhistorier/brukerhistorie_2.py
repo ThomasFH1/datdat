@@ -1,6 +1,6 @@
 import sqlite3
 from .brukerhistorie import Brukerhistorie
-from ..miscellaneous.les_salfil import les_salfil
+from miscellaneous.les_salfil import les_salfil
 
 
 class Brukerhistorie2(Brukerhistorie):

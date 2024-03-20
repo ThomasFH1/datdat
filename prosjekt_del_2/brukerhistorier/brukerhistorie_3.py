@@ -9,9 +9,10 @@ class Brukerhistorie3(Brukerhistorie):
             cursor = con.cursor()
 
             query = """
-            SELECT s.Radnummer, s.Områdenummer, GROUP_CONCAT(s.Kolonnenummer) AS LedigeKolonner, COUNT(*) as LedigeSeter
-            FROM Stol s
-            LEFT JOIN Billett b ON s.Kolonnenummer = b.Kolonnenummer
+            SELECT s.Radnummer, s.Områdenummer, 
+            GROUP_CONCAT(s.Kolonnenummer) AS LedigeKolonner, COUNT(*) as LedigeSeter
+            FROM Billett b
+            LEFT JOIN Stol s ON s.Kolonnenummer = b.Kolonnenummer
                                 AND s.Radnummer = b.Radnummer
                                 AND s.Områdenummer = b.Områdenummer
                                 AND s.Salnavn = b.Salnavn
@@ -34,22 +35,26 @@ class Brukerhistorie3(Brukerhistorie):
 
     def utfør_kjøp(self, stoler, fremvisningstidspunkt, salnavn, stykke_id):
         # TODO
-        insert_query = """
-                        INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
-                        """
+
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
-            for stol in stoler:
-                cursor.execute(
-                    insert_query,
-                    (stol["kolonnenummer"], stol["radnummer"], stol["områdenummer"],
-                     salnavn, self._teater_id, fremvisningstidspunkt, stykke_id)
-                )
+            cursor.executemany(
+                """
+                INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, 
+                Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                [(stol["kolonnenummer"], stol["radnummer"], stol["områdenummer"],
+                  salnavn, self._teater_id, fremvisningstidspunkt, stykke_id)
+                 for stol in stoler]
+            )
 
     def full_brukerhistorie(self):
-        # TODO
-        pass
+        ledige_rader = self.hent_ledige_rader(9, '2024-03-19 18:30', 'Hovedscenen', 2)
+        print("Disse radene har minst 9 ledige seter")
+        print(ledige_rader)
+        for rad in ledige_rader:
+            print(f"Rad {rad['radnummer']} i område {rad['områdenummer']} has {len(rad['ledie_kolonner'])} ledige seter")
 
 
 if __name__ == "__main__":
