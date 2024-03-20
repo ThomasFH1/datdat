@@ -21,6 +21,31 @@ class Populate:
                         [seat for seat in line.strip().replace("x", "")])
         return områder, dato
 
+    def _les_sqlite_db(self):
+        with sqlite3.connect(self._db_file_path) as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
+            tables = cur.fetchall()
+            db_contents = {}
+            for table_name in tables:
+                cur.execute(f"SELECT * FROM {table_name[0]}")
+                table_data = cur.fetchall()
+                column_names = [description[0]
+                                for description in cur.description]
+                db_contents[table_name[0]] = {
+                    "columns": column_names, "rows": table_data}
+        return db_contents
+
+    def les_alt(self):
+        db_contents = self._les_sqlite_db()
+
+        for table, data in db_contents.items():
+            print(f"Table: {table}")
+            print("Columns:", data["columns"])
+            for row in data["rows"]:
+                print(row)
+            print("\n")
+
     def sett_inn_stykke(self, stykketittel, varighet_minutt):
         con = sqlite3.connect(self._db_file_path)
         cursor = con.cursor()
@@ -138,3 +163,6 @@ if sys.argv[1] == "hent_skuespillere":
     populate.hent_skuespillere()
 if sys.argv[1] == "best_solgte_forestillinger":
     populate.best_solgte_forestillinger()
+
+if sys.argv[1] == "les_alt":
+    populate.les_alt()
