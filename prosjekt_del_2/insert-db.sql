@@ -247,7 +247,7 @@ VALUES
 (27, 30, 1), -- Magnus Mikaelsen har ansvar for lysdesign
 (28, 31, 1); -- Kristoffer Spender har ansvar for dramaturgi
 
-
+/*Deltakelse i akter kongsemnene*/
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
 (1, 2, 1), (2, 2, 1), (3, 2, 1), (4, 2, 1), (5, 2, 1),
@@ -255,7 +255,7 @@ VALUES
 (4, 2, 12), 
 (1, 2, 6), (2, 2, 6), (5, 2, 6), 
 (4, 2, 7),
-(1, 2, 11), -- Guttorm Ingesson er Baard bratte, avvik mellom "Akter og roller i Kongsemnene i prosjektbeskrivelse og nettside"
+(1, 2, 11), -- Guttorm Ingesson er Bard bratte, avvik mellom "Akter og roller i Kongsemnene i prosjektbeskrivelse og nettside"
 (1, 2, 3), (2, 2, 3), (3, 2, 3), (4, 2, 3), (5, 2, 3), 
 (1, 2, 2), (3, 2, 2), 
 (1, 2, 10), (2, 2, 10), (3, 2, 10), (4, 2, 10), (5, 2, 10),
