@@ -2,7 +2,7 @@ import sqlite3
 import sys
 
 
-class Populate:
+class Populater:
     def __init__(self, teater_id, db_file_path):
         self._teater_id = teater_id
         self._db_file_path = db_file_path
@@ -18,7 +18,7 @@ class Populate:
                     områder[last_område] = []
                 else:
                     områder[last_område].append(
-                        [seat for seat in line.strip().replace("x", "")])
+                        [int(seat) for seat in line.strip().replace("x", "")])
         return områder, dato
 
     def _les_sqlite_db(self):
@@ -36,10 +36,12 @@ class Populate:
                     "columns": column_names, "rows": table_data}
         return db_contents
 
-    def les_alt(self):
+    def les_db(self, tabeller):
         db_contents = self._les_sqlite_db()
 
         for table, data in db_contents.items():
+            if table not in tabeller and tabeller:
+                continue
             print(f"Table: {table}")
             print("Columns:", data["columns"])
             for row in data["rows"]:
@@ -53,6 +55,26 @@ class Populate:
                        (stykketittel, varighet_minutt))
         con.commit()
         con.close()
+
+    def sett_inn_sal(self, sal_filnavn, stykke_id):
+        with sqlite3.connect(self._db_file_path) as con:
+            cursor = con.cursor()
+            områder, dato = self._les_sal(f"{sal_filnavn}.txt")
+            salnavn = " ".join([word.capitalize()
+                                for word in sal_filnavn.split("-")])
+            cursor.execute("INSERT INTO Fremvisning VALUES (?, ?, ?, ?)",
+                           (dato, salnavn, self._teater_id, stykke_id))
+            områdenummer = 0
+            for områdenavn, rader in områder.items():
+                områdenummer += 1
+                for i, rad in enumerate(reversed(rader)):
+                    radnummer = i + 1
+                    for j, status in enumerate(rad):
+                        if not status:
+                            continue
+                        kolonnenummer = j + 1
+                        cursor.execute("INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                                       (kolonnenummer, radnummer, områdenummer, salnavn, self._teater_id, dato, stykke_id))
 
     def sett_inn_fremvisning(self, sal_filnavn, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:
@@ -68,11 +90,12 @@ class Populate:
                 for i, rad in enumerate(reversed(rader)):
                     radnummer = i + 1
                     for j, status in enumerate(rad):
+                        if not status:
+                            continue
                         kolonnenummer = j + 1
-                        if status == "1":
-                            cursor.execute("INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                                           (kolonnenummer, radnummer, områdenummer, salnavn, self._teater_id, dato, stykke_id))
-
+                        cursor.execute("INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                                       (kolonnenummer, radnummer, områdenummer, salnavn, self._teater_id, dato, stykke_id))
+    
     def kjøp_seter_samme_rad(self, mengde, fremvisningstidspunkt, salnavn, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
@@ -114,6 +137,8 @@ class Populate:
                 raise Exception(
                     f"Ingen rader med mer enn {mengde} ledige seter!")
 
+
+
     def hent_skuespillere():
         with sqlite3.connect("Theatre.db") as con:
             cursor = con.cursor()
@@ -146,10 +171,24 @@ class Populate:
             print(
                 "Dato og stykketittel på best solgte forestillinger, sortert i synkende rekkefølge:", row)
 
+    def hent_forestillinger():
+        with sqlite3.connect("Theatre.db") as con:
+            cursor = con.cursor()
+
+            query = """
+            SELECT Stykketittel, Fremvisningstidspunkt, COUNT(BillettID) as AntallSolgteBilletter
+            FROM Fremvisning
+            JOIN Teaterstykke on Fremvisning.StykkeID = Teaterstykke.StykkeID
+            JOIN Billett on Fremvisning.FremvisningID = Billett.FremvisningID
+            GROUP BY Fremvisning.FremvisningID
+            """
+            cursor.execute(query)
+            row = cursor.fetchall()
+            print("Dato og stykketittel på best solgte forestillinger", row)
 
 TEATER_ID = 1
 DB_FILE_PATH = "Theatre.db"
-populate = Populate(TEATER_ID, DB_FILE_PATH)
+populate = Populater(TEATER_ID, DB_FILE_PATH)
 if sys.argv[1] == "sett_inn_stykke":
     populate.sett_inn_stykke(sys.argv[2], sys.argv[3])
 if sys.argv[1] == "sett_inn_fremvisning":
@@ -164,5 +203,5 @@ if sys.argv[1] == "hent_skuespillere":
 if sys.argv[1] == "best_solgte_forestillinger":
     populate.best_solgte_forestillinger()
 
-if sys.argv[1] == "les_alt":
-    populate.les_alt()
+if sys.argv[1] == "les_db":
+    populate.les_db(sys.argv[2:])
