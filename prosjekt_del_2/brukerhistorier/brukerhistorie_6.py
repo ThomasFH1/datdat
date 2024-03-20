@@ -20,7 +20,7 @@ class Brukerhistorie6(Brukerhistorie):
                 "Dato og stykketittel på best solgte forestillinger, sortert i synkende rekkefølge:", row)
 
     def full_brukerhistorie(self):
-        self.best_solgte_forestillinger
+        self.best_solgte_forestillinger()
 
 
 if __name__ == "__main__":

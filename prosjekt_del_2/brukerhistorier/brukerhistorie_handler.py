@@ -3,6 +3,7 @@ from .brukerhistorie_3 import Brukerhistorie3
 from .brukerhistorie_4 import Brukerhistorie4
 from .brukerhistorie_5 import Brukerhistorie5
 from .brukerhistorie_6 import Brukerhistorie6
+from .brukerhistorie_7 import Brukerhistorie7
 
 
 class BrukerhistorieHandler:
@@ -13,6 +14,7 @@ class BrukerhistorieHandler:
             4: Brukerhistorie4(teater_id, db_file_path),
             5: Brukerhistorie5(teater_id, db_file_path),
             6: Brukerhistorie6(teater_id, db_file_path),
+            7: Brukerhistorie7(teater_id, db_file_path),
         }
 
     def brukerhistorier(self, historienummer):
