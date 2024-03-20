@@ -1,3 +1,4 @@
+from .brukerhistorie_1 import Brukerhistorie1
 from .brukerhistorie_2 import Brukerhistorie2
 from .brukerhistorie_3 import Brukerhistorie3
 from .brukerhistorie_4 import Brukerhistorie4
@@ -9,6 +10,7 @@ from .brukerhistorie_7 import Brukerhistorie7
 class BrukerhistorieHandler:
     def __init__(self, teater_id, db_file_path):
         self.brukerhistorier = {
+            1: Brukerhistorie1(teater_id, db_file_path),
             2: Brukerhistorie2(teater_id, db_file_path),
             3: Brukerhistorie3(teater_id, db_file_path),
             4: Brukerhistorie4(teater_id, db_file_path),
@@ -25,7 +27,7 @@ class BrukerhistorieHandler:
 
         if historienummer not in self.brukerhistorier:
             raise ValueError(
-                "Ugyldig brukerhistorienummer. Gyldige verdier er 2 til 6.")
+                "Ugyldig brukerhistorienummer. Gyldige verdier er 1 til 7.")
 
         brukerhistorie = self.brukerhistorier[historienummer]
         brukerhistorie.full_brukerhistorie()
