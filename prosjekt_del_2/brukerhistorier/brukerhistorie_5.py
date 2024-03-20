@@ -17,7 +17,9 @@ class Brukerhistorie5(Brukerhistorie):
             """
             cursor.execute(query)
             row = cursor.fetchall()
-            print("Navn på skuespillere og roller som opptrer i teaterstykkene:", row)
+            print("Navn på skuespillere og roller som opptrer i teaterstykkene:")
+            for skuespiller in row:
+                print(skuespiller)
 
     def full_brukerhistorie(self):
         self.hent_skuespillere()
