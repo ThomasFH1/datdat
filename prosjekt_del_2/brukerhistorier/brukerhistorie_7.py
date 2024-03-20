@@ -47,9 +47,10 @@ class Brukerhistorie7(Brukerhistorie):
 
 
     def full_brukerhistorie(self):
-        skuespillere = []
-        for skuespillernavn in skuespillere:
-            self.finn_medskuespillere(self, skuespillernavn)
+        fornavn = input("Fornavn:")
+        etternavn= input("Etternavn:")
+        self.finn_skuespillere_som_spilt_sammen(fornavn, etternavn)
+
 
 
 if __name__ == "__main__":

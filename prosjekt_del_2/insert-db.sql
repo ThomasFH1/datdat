@@ -265,16 +265,6 @@ VALUES
 (1 ,2, 8), (2, 2, 8), (3, 2, 8),
 (3, 2, 14) ,(4,2,14), (5, 2, 14);
 
-/* Roller i SAAEK sine akter */
-INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
-VALUES 
-(1, 1, 10), 
-(1, 1, 21), 
-(1, 1, 22), 
-(1, 1, 23), 
-(1, 1, 24),
-(1, 1, 25),
-(1, 1, 26);
 
 /*Brukerhistorie 3, fiktiv kunde*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
