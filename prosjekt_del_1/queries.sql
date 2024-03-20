@@ -1,7 +1,6 @@
 SELECT
-    Fornavn,
-    Etternavn,
     Teaterstykke.Stykketittel,
+    Bruker.Fornavn || ' ' || Bruker.Etternavn AS Fullt_navn,
     Rolle.Oppgavenavn
 FROM
     Bruker
@@ -9,4 +8,4 @@ FROM
     JOIN HarOppgaver ON Ansatt.AnsattID = HarOppgaver.AnsattID
     JOIN Rolle ON HarOppgaver.OppgaveID = Rolle.OppgaveID
     AND HarOppgaver.StykkeID = Rolle.StykkeID
-    JOIN Teaterstykke ON Rolle.StykkeID = Teaterstykke.StykkeID
+    JOIN Teaterstykke ON Rolle.StykkeID = Teaterstykke.StykkeID;
