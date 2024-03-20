@@ -96,8 +96,8 @@ class CommandManager:
             historienummer = int(historienummer)
         except:
             raise Exception("Brukerhistorienummer må være et heltall")
-        if 1 <= historienummer <= 6:
-            raise Exception("Brukerhistorienummer må være fra 1 til og med 6")
+        if 1 <= historienummer <= 7:
+            raise Exception("Brukerhistorienummer må være fra 1 til og med 7")
 
         if historienummer == 1:
             pass
