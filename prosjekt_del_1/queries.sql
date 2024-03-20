@@ -1,2 +1,2 @@
 SELECT *
-FROM Teater
+FROM Bruker
