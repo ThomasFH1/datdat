@@ -18,7 +18,7 @@ VALUES
 (4, 2, 'akt_4'),
 (5, 2, 'akt_5');
 
-/*Akter SAAEK*/
+/*Akter SAAEK - akt ikke oppgitt, antar bare en akt*/
 INSERT INTO Akt (Aktnummer, StykkeID, Aktnavn)
 VALUES 
 (1, 1, 'akt_1');
@@ -55,7 +55,7 @@ VALUES
 (00000000009, 9),
 (00000000010, 10),
 (00000000011, 11),
-(00000000012, 12),
+(00000000012, 12);
 
 /*Setter inn skuespillere SAAEK først som brukere, så ansatte*/
 /*Brukeremed BrukerID 13-19*/
@@ -89,7 +89,6 @@ VALUES
 ('Eivind', 'Myren', '+47000023', 'Slottsplassen 1, 0010 Oslo'),
 ('Mina', 'Rype Stokke', '+47000024', 'Slottsplassen 1, 0010 Oslo');
 
-/*Ansatte med AnsattID 20-23*/
 INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
 ('00000000021', 20),
@@ -98,7 +97,6 @@ VALUES
 ('00000000024', 23);
 
 /*Setter inn kunstnerisk lag til SAAEK først som brukere, så ansatte*/
-/*Brukere med BrukerID 24-28*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES 
 ('Jonas', 'Corell Petersen', '+47000025', 'Slottsplassen 1, 0010 Oslo'),
@@ -107,7 +105,6 @@ VALUES
 ('Magnus', 'Mikaelsen', '+47000028', 'Slottsplassen 1, 0010 Oslo'),
 ('Kristoffer', 'Spender', '+47000029', 'Slottsplassen 1, 0010 Oslo');
 
-/*Ansatte med AnsattID 24-28*/
 INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
 ('00000000025', 24),
@@ -142,8 +139,7 @@ VALUES
 ('Medvirkende', '2'),
 ('Kunstnerisk lag', '2');
 
-/* Oppgaver og roller i Kongsemnene */
-INSERT INTO Oppgave(OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
+INSERT INTO Oppgaver (OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
 VALUES
 (1, "Haakon Haakonssønn", 2, "Medvirkende"),
 (2, "Inga fra Varteig (Haakons mor)", 2, "Medvirkende"),
@@ -159,11 +155,7 @@ VALUES
 (12, "Jatgeir Skald", 2, "Medvirkende"),
 (13, "Dagfinn Bonde", 2, "Medvirkende"),
 (14, "Peter (prest og Ingebjørgs sønn)", 2, "Medvirkende"),
-(15, "Trønder", 2, "Medvirkende"),
-(20, 'Yury Butusov' 2, 'Kunstnerisk lag'),
-(21, 'Aleksandr Shishkin-Hokusai', 2, 'Kunstnerisk lag'),
-(22, 'Eivind Myren', 2, 'Kunstnerisk lag'),
-(23, 'Mina Rype Stokke', 2, 'Kunstnerisk lag');
+(15, "Trønder", 2, "Medvirkende");
 
 INSERT INTO Rolle(OppgaveID, StykkeID, Oppgavenavn)
 VALUES
@@ -203,36 +195,24 @@ VALUES
 (11, 13, 2), -- Emil Olafsson som Dagfinn Bonde (dobbeltrolle)
 (12, 14, 2); -- Snorre Ryen Tøndel som Peter (prest og Ingebjørgs sønn)
 
-INSERT INTO Oppgave(OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
-VALUES
-(13,'Sunniva Du Mond Nordal', 1, 'Medvirkende'),
-(14, 'Jo Saberniak', 1, 'Medvirkende'),
-(15, 'Marte M. Steinholt', 1, 'Medvirkende'),
-(16, 'Tor Ivar Hagen', 1, 'Medvirkende'),
-(17, 'Trond-Ove Skrødal', 1, 'Medvirkende'),
-(18, 'Natalie Grøndahl Tangen', 1, 'Medvirkende'),
-(19, 'Åsmund Flaten', 1, 'Medvirkende'),
-(24,'Jonas Corell Petersen', 1, 'Kunstnerisk lag'),
-(25, 'David Gehrt', 1, 'Kunstnerisk lag'),
-(26,'Gaute Tønder', 1, 'Kunstnerisk lag'),
-(27, 'Magnus Mikaelsen', 1, 'Kunstnerisk lag'),
-(28, 'Kristoffer Spender', 1, 'Kunstnerisk lag');
 
 
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
-(1, 2, 1), (2, 2, 1), (3, 2, 1), (4, 2, 1), (5, 2, 1), -- Håkon Håkonson i alle akter
-(1, 2, 2), (2, 2, 2), (3, 2, 2), (4, 2, 2), (5, 2, 2), -- Dagfinn Bonde i alle akter
-(4, 2, 3), -- Jatgeir Skald i akt 4
-(1, 2, 4), (2, 2, 4), (5, 2, 4), -- Sigrid i aktene 1, 2 og 5
-(4, 2, 5), -- Ingeborg i akt 4
-(1, 2, 6), -- Guttorm Ingesson i akt 1
-(1, 2, 7), (2, 2, 7), (3, 2, 7), (4, 2, 7), (5, 2, 7), -- Skule Jarl i alle akter
-(1, 2, 8), (3, 2, 8), -- Inga frå Varteig i akt 1 og 3
-(1, 2, 9), (2, 2, 9), (3, 2, 9), (4, 2, 9), (5, 2, 9), -- Paal Flida i alle akter
-(1, 2, 10), (5, 2, 10), -- Ragnhild i akt 1 og 5
-(1, 2, 11), (2, 2, 11), (3, 2, 11), (4, 2, 11), (5, 2, 11), -- Gregorius Jonsson i alle akter
-(1, 2, 12), (2, 2, 12), (3, 2, 12), (4, 2, 12), (5, 2, 12); -- Margrete i alle
+(1, 2, 1), (2, 2, 1), (3, 2, 1), (4, 2, 1), (5, 2, 1),
+(1, 2, 13), (2, 2, 13), (3, 2, 13), (4, 2, 13), (5, 2, 13), 
+(4, 2, 12), 
+(1, 2, 6), (2, 2, 6), (5, 2, 6), 
+(4, 2, 7),
+(1, 2, 11), -- Guttorm Ingesson er Bard bratte, avvik mellom "Akter og roller i Kongsemnene i prosjektbeskrivelse og nettside"
+(1, 2, 3), (2, 2, 3), (3, 2, 3), (4, 2, 3), (5, 2, 3), 
+(1, 2, 2), (3, 2, 2), 
+(1, 2, 10), (2, 2, 10), (3, 2, 10), (4, 2, 10), (5, 2, 10),
+(1, 2, 4), (5, 2, 4),
+(1, 2, 9), (2, 2, 9), (3, 2, 9), (4, 2, 9), (5, 2, 9),
+(1, 2, 5), (2, 2, 5), (3, 2, 5), (4, 2, 5), (5, 2, 5),
+(1 ,2, 8), (2, 2, 8), (3, 2, 8),
+(3, 2, 14) ,(4,2,14), (5, 2, 14);
 
 
 /*Brukerhistorie 3, fiktiv kunde*/
@@ -243,6 +223,3 @@ VALUES
 INSERT INTO Kunde (KundeID, BrukerID)
 VALUES
 (30, 30);
-
-INSERT INTO Rolle (OppgaveID, Oppgavenavn, StykkeID)
-VALUE
