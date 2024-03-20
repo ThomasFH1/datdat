@@ -269,7 +269,7 @@ VALUES
 /* Roller i SAAEK sine akter */
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
-(1, 1, 10), 
+(1, 1, 20), 
 (1, 1, 21), 
 (1, 1, 22), 
 (1, 1, 23), 
@@ -285,3 +285,31 @@ VALUES
 INSERT INTO Kunde (KundeID, BrukerID)
 VALUES
 (30, 30);
+
+INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
+VALUES
+('Nora', 'Hawk', '+47000031', 'Kongens gate 1, 0153 Oslo');
+
+INSERT INTO Ansatt (Personnummer, BrukerID)
+VALUES 
+('00000000025', 30);
+
+INSERT INTO Oppgaver (OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
+VALUES
+(100, "Tiss", 2, "Medvirkende");
+
+INSERT INTO Rolle(OppgaveID, StykkeID, Oppgavenavn)
+VALUES
+(100, 2, "Tiss");
+
+INSERT INTO HarOppgaver (AnsattID, OppgaveID, StykkeID)
+VALUES
+(30, 100, 2);
+
+INSERT INTO Akt (Aktnummer, StykkeID, Aktnavn)
+VALUES 
+(6, 2, 'akt_6');
+
+INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
+VALUES 
+(6, 2, 100), (6, 2, 1);
