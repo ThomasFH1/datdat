@@ -89,6 +89,7 @@ VALUES
 ('Eivind', 'Myren', '+47000023', 'Slottsplassen 1, 0010 Oslo'),
 ('Mina', 'Rype Stokke', '+47000024', 'Slottsplassen 1, 0010 Oslo');
 
+/*Ansatte med AnsattID 20-23*/
 INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
 ('00000000021', 20),
@@ -97,6 +98,7 @@ VALUES
 ('00000000024', 23);
 
 /*Setter inn kunstnerisk lag til SAAEK først som brukere, så ansatte*/
+/*Brukere med BrukerID 24-28*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES 
 ('Jonas', 'Corell Petersen', '+47000025', 'Slottsplassen 1, 0010 Oslo'),
@@ -105,6 +107,7 @@ VALUES
 ('Magnus', 'Mikaelsen', '+47000028', 'Slottsplassen 1, 0010 Oslo'),
 ('Kristoffer', 'Spender', '+47000029', 'Slottsplassen 1, 0010 Oslo');
 
+/*Ansatte med AnsattID 24-28*/
 INSERT INTO Ansatt (Personnummer, BrukerID)
 VALUES 
 ('00000000025', 24),
@@ -139,6 +142,7 @@ VALUES
 ('Medvirkende', '2'),
 ('Kunstnerisk lag', '2');
 
+/* Oppgaver og roller i Kongsemnene */
 INSERT INTO Oppgave(OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
 VALUES
 (1, "Haakon Haakonssønn", 2, "Medvirkende"),
@@ -155,7 +159,11 @@ VALUES
 (12, "Jatgeir Skald", 2, "Medvirkende"),
 (13, "Dagfinn Bonde", 2, "Medvirkende"),
 (14, "Peter (prest og Ingebjørgs sønn)", 2, "Medvirkende"),
-(15, "Trønder", 2, "Medvirkende");
+(15, "Trønder", 2, "Medvirkende"),
+(20, 'Yury Butusov' 2, 'Kunstnerisk lag'),
+(21, 'Aleksandr Shishkin-Hokusai', 2, 'Kunstnerisk lag'),
+(22, 'Eivind Myren', 2, 'Kunstnerisk lag'),
+(23, 'Mina Rype Stokke', 2, 'Kunstnerisk lag');
 
 INSERT INTO Rolle(OppgaveID, StykkeID, Oppgavenavn)
 VALUES
@@ -195,6 +203,20 @@ VALUES
 (11, 13, 2), -- Emil Olafsson som Dagfinn Bonde (dobbeltrolle)
 (12, 14, 2); -- Snorre Ryen Tøndel som Peter (prest og Ingebjørgs sønn)
 
+INSERT INTO Oppgave(OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
+VALUES
+(13,'Sunniva Du Mond Nordal', 1, 'Medvirkende'),
+(14, 'Jo Saberniak', 1, 'Medvirkende'),
+(15, 'Marte M. Steinholt', 1, 'Medvirkende'),
+(16, 'Tor Ivar Hagen', 1, 'Medvirkende'),
+(17, 'Trond-Ove Skrødal', 1, 'Medvirkende'),
+(18, 'Natalie Grøndahl Tangen', 1, 'Medvirkende'),
+(19, 'Åsmund Flaten', 1, 'Medvirkende'),
+(24,'Jonas Corell Petersen', 1, 'Kunstnerisk lag'),
+(25, 'David Gehrt', 1, 'Kunstnerisk lag'),
+(26,'Gaute Tønder', 1, 'Kunstnerisk lag'),
+(27, 'Magnus Mikaelsen', 1, 'Kunstnerisk lag'),
+(28, 'Kristoffer Spender', 1, 'Kunstnerisk lag');
 
 
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
