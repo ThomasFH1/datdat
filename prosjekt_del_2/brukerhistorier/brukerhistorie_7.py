@@ -1,6 +1,28 @@
 import sqlite3
 from .brukerhistorie import Brukerhistorie
 
+#Foreslått sql spørring
+"""
+SELECT DISTINCT
+    ts.Stykketittel AS PlayTitle,
+    ak.Aktnavn AS ActName,
+    GROUP_CONCAT(DISTINCT b2.Fornavn || ' ' || b2.Etternavn) AS CoActors
+FROM Ansatt a1
+JOIN Bruker b1 ON a1.BrukerID = b1.BrukerID
+JOIN HarOppgaver ho1 ON a1.AnsattID = ho1.AnsattID
+JOIN Deltar d1 ON ho1.OppgaveID = d1.OppgaveID AND ho1.StykkeID = d1.StykkeID
+JOIN Akt ak ON d1.Aktnummer = ak.Aktnummer AND d1.StykkeID = ak.StykkeID
+JOIN Teaterstykke ts ON ak.StykkeID = ts.StykkeID
+JOIN Deltar d2 ON ak.StykkeID = d2.StykkeID AND ak.Aktnummer = d2.Aktnummer
+JOIN HarOppgaver ho2 ON d2.OppgaveID = ho2.OppgaveID AND d2.StykkeID = ho2.StykkeID
+JOIN Ansatt a2 ON ho2.AnsattID = a2.AnsattID
+JOIN Bruker b2 ON a2.BrukerID = b2.BrukerID
+WHERE b1.Fornavn || ' ' || b1.Etternavn = 'Specified Actor Name'
+AND b2.Fornavn || ' ' || b2.Etternavn != 'Specified Actor Name'
+GROUP BY ts.Stykketittel, ak.Aktnavn
+ORDER BY ts.Stykketittel, ak.Aktnummer;
+
+"""
 
 class Brukerhistorie7(Brukerhistorie):
     def hent_akter_og_skuespillere(self):
