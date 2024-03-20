@@ -139,6 +139,7 @@ VALUES
 ('Medvirkende', '2'),
 ('Kunstnerisk lag', '2');
 
+/* Oppgaver til kongsemnene */
 INSERT INTO Oppgaver (OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
 VALUES
 (1, "Haakon Haakonssønn", 2, "Medvirkende"),
@@ -156,7 +157,12 @@ VALUES
 (13, "Dagfinn Bonde", 2, "Medvirkende"),
 (14, "Peter (prest og Ingebjørgs sønn)", 2, "Medvirkende"),
 (15, "Trønder", 2, "Medvirkende");
+(16, 'Regi og musikkutvelgelse', 2, 'Kunstnerisk lag'),
+(17, 'Scenografi og kostymer', 2, 'Kunstnerisk lag'),
+(18, 'Lysdesign', 2, 'Kunstnerisk lag'),
+(19, 'Dramaturg', 2, 'Kunstnerisk lag');
 
+/* Roller i kongsemnene */
 INSERT INTO Rolle(OppgaveID, StykkeID, Oppgavenavn)
 VALUES
 (1, 2, "Haakon Haakonssønn"),
@@ -193,9 +199,53 @@ VALUES
 (10, 15, 2), -- Fabian Heidelberg Lunde som Trønder (dobbeltrolle)
 (11, 12, 2), -- Emil Olafsson som Jatgeir Skald
 (11, 13, 2), -- Emil Olafsson som Dagfinn Bonde (dobbeltrolle)
-(12, 14, 2); -- Snorre Ryen Tøndel som Peter (prest og Ingebjørgs sønn)
+(12, 14, 2), -- Snorre Ryen Tøndel som Peter (prest og Ingebjørgs sønn)
+(20, 16, 2), -- Yury Butusov har ansvar for regi og musikkutvelgelse
+(21, 17, 2), -- Aleksandr Shishkin-Hokusai har ansvar for scenografi og kostymer
+(22, 18, 2), -- Eivind Myren har ansvar for lysdesign
+(23, 19, 2); -- Mina Rype Stokke har ansvar for dramaturgi
 
+/* Oppgaver i SAAEK */
+INSERT INTO Oppgaver (OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
+VALUES
+(20, 'Sunniva Du Mond Nordal', 1, 'Medvirkende'),
+(21, 'Jo Saberniak', 1, 'Medvirkende'),
+(22, 'Marte M. Steinholt', 1, 'Medvirkende'),
+(23, 'Tor Ivar Hagen', 1, 'Medvirkende'),
+(24, 'Trond-Ove Skrødal', 1, 'Medvirkende'),
+(25, 'Natalie Grøndahl Tangen', 1, 'Medvirkende'),
+(26, 'Åsmund Flaten', '+47000020', 1, 'Medvirkende'),
+(27, 'Regi', 1, 'Kunstnerisk lag'),
+(28. 'Scenografi og kostymer', 1, 'Kunstnerisk lag'),
+(29, 'Musikalsk ansvarlig', 1, 'Kunstnerisk lag'),
+(30, 'Lysdesign', 1, 'Kunstnerisk lag'),
+(31, 'Dramaturg', 1, 'Kunstnerisk lag');
 
+/* Roller i SAAEK */
+INSERT INTO Rolle(OppgaveID, StykkeID, Oppgavenavn)
+VALUES
+(20, 1, "Sunniva Du Mond Nordal"),
+(21, 1, "Jo Saberniak"),
+(22, 1, "Marte M. Steinholt"),
+(23, 1, "Tor Ivar Hagen"),
+(24, 1, "Trond-Ove Skrødal"),
+(25, 1, "Natalie Grøndahl Tangen"),
+(26, 1, "Åsmund Flaten");
+
+INSERT INTO HarOppgaver (AnsattID, OppgaveID, StykkeID)
+VALUES
+(13, 20, 1), -- Sunniva Du Mond Nordal spiller seg selv
+(14, 21, 1), -- Jo Saberniak spiller seg selv
+(15, 22, 1), -- Marte M. Steinholt spiller seg selv
+(16, 23, 1), -- Tor Ivar Hagen spiller seg selv
+(17, 24, 1), -- Trond-Ove Skrødal spiller seg selv
+(18, 25, 1), -- Natalie Grøndahl Tangen spiller seg selv
+(19, 26, 1), -- Åsmund Flaten spiller seg selv
+(24, 27, 1), -- Jonas Corell Petersen har ansvar for regi
+(25, 28, 1), -- David Gehrt er scenografi- og kostymeansvarlig
+(26, 29, 1), -- Gaute Tønder er musikalsk ansvarlif
+(27, 30, 1), -- Magnus Mikaelsen har ansvar for lysdesign
+(28, 31, 1); -- Kristoffer Spender har ansvar for dramaturgi
 
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
