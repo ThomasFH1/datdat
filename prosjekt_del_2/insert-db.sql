@@ -199,18 +199,20 @@ VALUES
 
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
-(1, 2, 1), (2, 2, 1), (3, 2, 1), (4, 2, 1), (5, 2, 1), -- Håkon Håkonson i alle akter
-(1, 2, 2), (2, 2, 2), (3, 2, 2), (4, 2, 2), (5, 2, 2), -- Dagfinn Bonde i alle akter
-(4, 2, 3), -- Jatgeir Skald i akt 4
-(1, 2, 4), (2, 2, 4), (5, 2, 4), -- Sigrid i aktene 1, 2 og 5
-(4, 2, 5), -- Ingeborg i akt 4
-(1, 2, 6), -- Guttorm Ingesson i akt 1
-(1, 2, 7), (2, 2, 7), (3, 2, 7), (4, 2, 7), (5, 2, 7), -- Skule Jarl i alle akter
-(1, 2, 8), (3, 2, 8), -- Inga frå Varteig i akt 1 og 3
-(1, 2, 9), (2, 2, 9), (3, 2, 9), (4, 2, 9), (5, 2, 9), -- Paal Flida i alle akter
-(1, 2, 10), (5, 2, 10), -- Ragnhild i akt 1 og 5
-(1, 2, 11), (2, 2, 11), (3, 2, 11), (4, 2, 11), (5, 2, 11), -- Gregorius Jonsson i alle akter
-(1, 2, 12), (2, 2, 12), (3, 2, 12), (4, 2, 12), (5, 2, 12); -- Margrete i alle
+(1, 2, 1), (2, 2, 1), (3, 2, 1), (4, 2, 1), (5, 2, 1),
+(1, 2, 13), (2, 2, 13), (3, 2, 13), (4, 2, 13), (5, 2, 13), 
+(4, 2, 12), 
+(1, 2, 6), (2, 2, 6), (5, 2, 6), 
+(4, 2, 7),
+(1, 2, 11), -- Guttorm Ingesson er Bard bratte, avvik mellom "Akter og roller i Kongsemnene i prosjektbeskrivelse og nettside"
+(1, 2, 3), (2, 2, 3), (3, 2, 3), (4, 2, 3), (5, 2, 3), 
+(1, 2, 2), (3, 2, 2), 
+(1, 2, 10), (2, 2, 10), (3, 2, 10), (4, 2, 10), (5, 2, 10),
+(1, 2, 4), (5, 2, 4),
+(1, 2, 9), (2, 2, 9), (3, 2, 9), (4, 2, 9), (5, 2, 9),
+(1, 2, 5), (2, 2, 5), (3, 2, 5), (4, 2, 5), (5, 2, 5),
+(1 ,2, 8), (2, 2, 8), (3, 2, 8),
+(3, 2, 14) ,(4,2,14), (5, 2, 14);
 
 
 /*Brukerhistorie 3, fiktiv kunde*/
