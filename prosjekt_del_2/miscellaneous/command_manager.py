@@ -41,8 +41,8 @@ class CommandManager(BrukerhistorieHandler):
         db_utils_instance.load_intial_data()
 
     @cmd
-    def brukerhistorier(self, brukerhistorienummer):
-        self._brukerhistorie_handler_instance.brukerhistorier(
+    def brukerhistorie(self, brukerhistorienummer):
+        self._brukerhistorie_handler_instance.brukerhistorie(
             brukerhistorienummer)
 
     #  ↓ Alle metoder som brukes innad i brukerhistoriene dersom bruker ønsker å kjøre dem selv

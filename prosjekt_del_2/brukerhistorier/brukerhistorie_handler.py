@@ -17,7 +17,7 @@ class BrukerhistorieHandler:
             7: Brukerhistorie7(teater_id, db_file_path),
         }
 
-    def brukerhistorier(self, historienummer):
+    def brukerhistorie(self, historienummer):
         try:
             historienummer = int(historienummer)
         except ValueError:
