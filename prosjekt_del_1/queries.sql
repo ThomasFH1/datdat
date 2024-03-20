@@ -1,17 +1,12 @@
 SELECT
-    Teaterstykke.StykkeID,
+    Fornavn,
+    Etternavn,
     Teaterstykke.Stykketittel,
-    Fremvisning.Fremvisningstidspunkt,
-    COUNT(Billett.BillettID) AS AntallSolgteBilletter
+    Rolle.Oppgavenavn
 FROM
-    Fremvisning
-JOIN Teaterstykke ON Fremvisning.StykkeID = Teaterstykke.StykkeID
-JOIN Billett ON 
-    Fremvisning.Fremvisningstidspunkt = Billett.Fremvisningstidspunkt AND
-    Fremvisning.Salnavn = Billett.Salnavn AND
-    Fremvisning.TeaterID = Billett.TeaterID AND
-    Fremvisning.StykkeID = Billett.StykkeID
-GROUP BY
-    Fremvisning.Fremvisningstidspunkt, Teaterstykke.Stykketittel
-ORDER BY
-    AntallSolgteBilletter DESC;
+    Bruker
+    JOIN Ansatt ON Ansatt.BrukerID = Bruker.BrukerID
+    JOIN HarOppgaver ON Ansatt.AnsattID = HarOppgaver.AnsattID
+    JOIN Rolle ON HarOppgaver.OppgaveID = Rolle.OppgaveID
+    AND HarOppgaver.StykkeID = Rolle.StykkeID
+    JOIN Teaterstykke ON Rolle.StykkeID = Teaterstykke.StykkeID
