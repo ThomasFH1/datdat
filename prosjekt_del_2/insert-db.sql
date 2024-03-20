@@ -18,7 +18,7 @@ VALUES
 (4, 2, 'akt_4'),
 (5, 2, 'akt_5');
 
-/*Akter SAAEK*/
+/*Akter SAAEK - akt ikke oppgitt, antar bare en akt*/
 INSERT INTO Akt (Aktnummer, StykkeID, Aktnavn)
 VALUES 
 (1, 1, 'akt_1');
@@ -54,7 +54,7 @@ VALUES
 (00000000009, 9),
 (00000000010, 10),
 (00000000011, 11),
-(00000000012, 12),
+(00000000012, 12);
 
 /*Setter inn skuespillere SAAEK først som brukere, så ansatte*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
@@ -136,7 +136,7 @@ VALUES
 ('Medvirkende', '2'),
 ('Kunstnerisk lag', '2');
 
-INSERT INTO Oppgave(OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
+INSERT INTO Oppgaver (OppgaveID, Oppgavenavn, StykkeID, Lagnavn)
 VALUES
 (1, "Haakon Haakonssønn", 2, "Medvirkende"),
 (2, "Inga fra Varteig (Haakons mor)", 2, "Medvirkende"),
