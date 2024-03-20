@@ -9,9 +9,9 @@ class Brukerhistorie2(Brukerhistorie):
             cursor = con.cursor()
             cursor.execute(
                 """INSERT INTO Billett 
-                (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)""",
-                (kolonnenummer, radnummer, områdenummer, salnavn, self._teater_id, dato, stykke_id))
+                (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID, PrisGruppe) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                (kolonnenummer, radnummer, områdenummer, salnavn, self._teater_id, dato, stykke_id, "Ordinær"))
             con.commit()
 
     def _sett_inn_fremvisning(self, salnavn, stykke_id, dato):

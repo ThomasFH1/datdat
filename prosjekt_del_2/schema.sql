@@ -130,7 +130,7 @@ CREATE TABLE
         ) REFERENCES BillettPris (
         Prisgruppe,
         StykkeID
-        Pris
+        )
     );
 
 CREATE TABLE

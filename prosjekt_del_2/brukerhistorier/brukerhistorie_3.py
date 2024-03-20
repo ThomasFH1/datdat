@@ -7,6 +7,8 @@ from .brukerhistorie import Brukerhistorie
 class Brukerhistorie3(Brukerhistorie):
     @staticmethod
     def _spør_om_rad(minimum_ledige_seter, ledige_rader):
+        """Tar input og verifiserer at den raden har nok ledige seter."""
+
         try:
             områdenummer = int(
                 input("Hvilket område vil du kjøpe billetter til: "))
@@ -67,23 +69,22 @@ class Brukerhistorie3(Brukerhistorie):
             cursor.executemany(
                 """
                 INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, 
-                Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID, PrisGruppe)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 [(stol["kolonnenummer"], stol["radnummer"], stol["områdenummer"],
-                  salnavn, self._teater_id, fremvisningstidspunkt, stykke_id)
+                  salnavn, self._teater_id, fremvisningstidspunkt, stykke_id, "Ordinær")
                  for stol in stoler]
             )
-            query = """
-                    SELECT * FROM Billett
-                    WHERE Fremvisningstidspunkt = ?
-                    AND StykkeID = ?
-                    AND TeaterID = ?
-                    """
-            cursor.execute(query, (fremvisningstidspunkt,
-                           stykke_id, self._teater_id))
-            inserted_tickets = cursor.fetchall()
-            print(inserted_tickets)
+            cursor.execute(
+                "SELECT BillettID FROM Billett ORDER BY BillettID DESC LIMIT 1"
+            )
+            siste_id = cursor.fetchone()[0]
+            antall_billetter_kjøpt = len(stoler) 
+            første_id = siste_id - antall_billetter_kjøpt + 1
+            
+
+            print(siste_id, første_id)
 
     def full_brukerhistorie(self):
         MINIMUM_LEDIGE_SETER = 9
