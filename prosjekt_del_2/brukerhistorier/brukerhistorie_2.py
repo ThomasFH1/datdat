@@ -45,7 +45,7 @@ class Brukerhistorie2(Brukerhistorie):
 
     def full_brukerhistorie(self):
         self.sett_inn_billetter_til_fremvisning("hovedscenen", 2)
-        self.sett_inn_billetter_til_fremvisning("gamle-scenen", 1)
+        self.sett_inn_billetter_til_fremvisning("gamle-scene", 1)
 
 
 if __name__ == "__main__":
