@@ -28,5 +28,5 @@ class Brukerhistorie5:
 if __name__ == "__main__":
     TEATER_ID = 1
     DB_FILE_PATH = "Theatre.db"
-    populate = Brukerhistorie5(TEATER_ID, DB_FILE_PATH)
-    populate.full_brukerhistorie()
+    brukerhistorie_instance = Brukerhistorie5(TEATER_ID, DB_FILE_PATH)
+    brukerhistorie_instance.full_brukerhistorie()

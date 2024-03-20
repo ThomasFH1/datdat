@@ -17,7 +17,7 @@ def command_handler(commands={}):
 cmd_handler = command_handler()
 
 
-class Manager:
+class CommandManager:
     @staticmethod
     def execute_command(command, *args):
         if command in cmd_handler.commands:
@@ -117,8 +117,8 @@ class Manager:
 
 TEATER_ID = 1
 DB_FILE_PATH = "Theatre.db"
-populate = Manager(TEATER_ID, DB_FILE_PATH)
+populate = CommandManager(TEATER_ID, DB_FILE_PATH)
 
 command = sys.argv[1]
 arguments = sys.argv[2:]
-Manager.execute_command(command, *arguments)
+CommandManager.execute_command(command, *arguments)
