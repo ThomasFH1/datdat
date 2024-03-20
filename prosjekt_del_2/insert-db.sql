@@ -221,7 +221,3 @@ VALUES
 INSERT INTO Kunde (KundeID, BrukerID)
 VALUES
 (30, 30);
-
-INSERT INTO Rolle (OppgaveID, Oppgavenavn, StykkeID)
-VALUES
-()
