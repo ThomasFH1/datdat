@@ -2,7 +2,28 @@ import sqlite3
 import sys
 
 
+def command_handler(commands={}):
+    def decorator(func):
+        commands[func.__name__] = func
+
+        def wrapper(*args, **kwargs):
+            return func(*args, **kwargs)
+        return wrapper
+    decorator.commands = commands
+    return decorator
+
+
+cmd_handler = command_handler()
+
+
 class Populater:
+    @staticmethod
+    def execute_command(command, *args):
+        if command in cmd_handler.commands:
+            cmd_handler.commands[command](populate, *args)
+        else:
+            print(f"No command found for: {command}")
+
     def __init__(self, teater_id, db_file_path):
         self._teater_id = teater_id
         self._db_file_path = db_file_path
@@ -36,6 +57,7 @@ class Populater:
                     "columns": column_names, "rows": table_data}
         return db_contents
 
+    @cmd_handler
     def les_db(self, tabeller):
         db_contents = self._les_sqlite_db()
 
@@ -48,6 +70,7 @@ class Populater:
                 print(row)
             print("\n")
 
+    @cmd_handler
     def sett_inn_stykke(self, stykketittel, varighet_minutt):
         con = sqlite3.connect(self._db_file_path)
         cursor = con.cursor()
@@ -56,6 +79,7 @@ class Populater:
         con.commit()
         con.close()
 
+    @cmd_handler
     def sett_inn_sal(self, sal_filnavn, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
@@ -76,6 +100,7 @@ class Populater:
                         cursor.execute("INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID) VALUES (?, ?, ?, ?, ?, ?, ?)",
                                        (kolonnenummer, radnummer, områdenummer, salnavn, self._teater_id, dato, stykke_id))
 
+    @cmd_handler
     def sett_inn_fremvisning(self, sal_filnavn, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
@@ -95,7 +120,8 @@ class Populater:
                         kolonnenummer = j + 1
                         cursor.execute("INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID) VALUES (?, ?, ?, ?, ?, ?, ?)",
                                        (kolonnenummer, radnummer, områdenummer, salnavn, self._teater_id, dato, stykke_id))
-    
+
+    @cmd_handler
     def kjøp_seter_samme_rad(self, mengde, fremvisningstidspunkt, salnavn, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
@@ -137,8 +163,7 @@ class Populater:
                 raise Exception(
                     f"Ingen rader med mer enn {mengde} ledige seter!")
 
-
-
+    @cmd_handler
     def hent_skuespillere():
         with sqlite3.connect("Theatre.db") as con:
             cursor = con.cursor()
@@ -154,6 +179,7 @@ class Populater:
             row = cursor.fetchall()
             print("Navn på skuespillere og roller som opptrer i teaterstykkene:", row)
 
+    @cmd_handler
     def best_solgte_forestillinger():
         with sqlite3.connect("Theatre.db") as con:
             cursor = con.cursor()
@@ -171,6 +197,7 @@ class Populater:
             print(
                 "Dato og stykketittel på best solgte forestillinger, sortert i synkende rekkefølge:", row)
 
+    @cmd_handler
     def hent_forestillinger():
         with sqlite3.connect("Theatre.db") as con:
             cursor = con.cursor()
@@ -186,22 +213,11 @@ class Populater:
             row = cursor.fetchall()
             print("Dato og stykketittel på best solgte forestillinger", row)
 
+
 TEATER_ID = 1
 DB_FILE_PATH = "Theatre.db"
 populate = Populater(TEATER_ID, DB_FILE_PATH)
-if sys.argv[1] == "sett_inn_stykke":
-    populate.sett_inn_stykke(sys.argv[2], sys.argv[3])
-if sys.argv[1] == "sett_inn_fremvisning":
-    populate.sett_inn_fremvisning(sys.argv[2], sys.argv[3])
 
-if sys.argv[1] == "kjøp_seter_samme_rad":
-    populate.kjøp_seter_samme_rad(
-        sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
-
-if sys.argv[1] == "hent_skuespillere":
-    populate.hent_skuespillere()
-if sys.argv[1] == "best_solgte_forestillinger":
-    populate.best_solgte_forestillinger()
-
-if sys.argv[1] == "les_db":
-    populate.les_db(sys.argv[2:])
+command = sys.argv[1]
+arguments = sys.argv[2:]
+Populater.execute_command(command, *arguments)
