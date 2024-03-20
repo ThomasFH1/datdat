@@ -1,6 +1,6 @@
 from brukerhistorier import BrukerhistorieHandler
 from .db_utils import DBUtils
-
+from .logger import logger
 
 def command_handler(commands={}):
     def decorator(func):
@@ -26,9 +26,10 @@ class CommandManager(BrukerhistorieHandler):
 
     def execute_command(self, command, *args):
         if command in cmd.commands:
+            logger.info(f"Executing {command}")
             cmd.commands[command](self, *args)
         else:
-            print(f"No command found for: {command}")
+            logger.error(f"No command found for: {command}")
 
     @cmd
     def les_db(self, *tabeller):

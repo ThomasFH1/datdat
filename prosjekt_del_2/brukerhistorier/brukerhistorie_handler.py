@@ -1,3 +1,5 @@
+from miscellaneous.logger import logger
+
 from .brukerhistorie_1 import Brukerhistorie1
 from .brukerhistorie_2 import Brukerhistorie2
 from .brukerhistorie_3 import Brukerhistorie3
@@ -23,11 +25,12 @@ class BrukerhistorieHandler:
         try:
             historienummer = int(historienummer)
         except ValueError:
-            raise ValueError("Brukerhistorienummer må være et heltall")
+            logger.error("Brukerhistorienummer må være et heltall")
+            return
 
         if historienummer not in self.brukerhistorier:
-            raise ValueError(
-                "Ugyldig brukerhistorienummer. Gyldige verdier er 1 til 7.")
+            logger.error("Ugyldig brukerhistorienummer. Gyldige verdier er 1 til 7.")
+            return
 
         brukerhistorie = self.brukerhistorier[historienummer]
         brukerhistorie.full_brukerhistorie()

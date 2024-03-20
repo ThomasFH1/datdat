@@ -1,5 +1,6 @@
 import sqlite3
 import os
+from .logger import logger
 
 class DBUtils:
     def __init__(self, db_file_path):
@@ -44,14 +45,17 @@ class DBUtils:
 
     def reset_db(self):
         os.remove(self._db_file_path)
+        logger.debug("Database file whiped!")
+
         self.configure_db()
         self.load_intial_data()
 
     def configure_db(self):
         self._execute_sqlscript("opprett.sql")
-        print("HUH")
         self._execute_sqlscript("schema.sql")
+        logger.debug("Database configured!")
 
     def load_intial_data(self):
         self._execute_sqlscript("insert-db.sql")
+        logger.debug("Initial data loaded!")
 
