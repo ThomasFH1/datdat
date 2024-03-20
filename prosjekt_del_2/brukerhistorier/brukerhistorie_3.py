@@ -1,8 +1,30 @@
 import sqlite3
+from miscellaneous.logger import logger
+
 from .brukerhistorie import Brukerhistorie
 
 
 class Brukerhistorie3(Brukerhistorie):
+    @staticmethod
+    def _spør_om_rad(minimum_ledige_seter, ledige_rader):
+        try:
+            områdenummer = int(
+                input("Hvilket område vil du kjøpe billetter til: "))
+            if not any([ledig_rad["områdenummer"] == områdenummer for ledig_rad in ledige_rader]):
+                logger.error(
+                    f"Område hadde ikke en rad med minst {minimum_ledige_seter} ledige seter!")
+                exit()
+
+            radnummer = int(input("Hvilken rad vil du kjøpe billetter til: "))
+            if not any([ledig_rad["områdenummer"] == områdenummer and ledig_rad["radnummer"] == radnummer
+                        for ledig_rad in ledige_rader]):
+                logger.error(
+                    f"Raden hadde ikke minst {minimum_ledige_seter} ledige seter!")
+                exit()
+        except ValueError:
+            logger.error("Områdenummer og radnummer må være heltall")
+
+        return områdenummer, radnummer
 
     def hent_ledige_rader(self, mengde, fremvisningstidspunkt, salnavn, stykke_id):
         with sqlite3.connect(self._db_file_path) as con:
@@ -11,15 +33,15 @@ class Brukerhistorie3(Brukerhistorie):
             query = """
             SELECT s.Radnummer, s.Områdenummer, 
             GROUP_CONCAT(s.Kolonnenummer) AS LedigeKolonner, COUNT(*) as LedigeSeter
-            FROM Billett b
-            LEFT JOIN Stol s ON s.Kolonnenummer = b.Kolonnenummer
+            FROM Stol s
+            LEFT JOIN Billett b ON s.Kolonnenummer = b.Kolonnenummer
                                 AND s.Radnummer = b.Radnummer
                                 AND s.Områdenummer = b.Områdenummer
                                 AND s.Salnavn = b.Salnavn
                                 AND s.TeaterID = b.TeaterID
                                 AND b.Fremvisningstidspunkt = ?
-                                AND b.Salnavn = ?
                                 AND b.TeaterID = ?
+                                AND b.Salnavn = ?
                                 AND b.StykkeID = ?
             WHERE b.BillettID IS NULL AND s.Salnavn = ? AND s.TeaterID = ?
             GROUP BY s.Radnummer, s.Områdenummer
@@ -29,8 +51,12 @@ class Brukerhistorie3(Brukerhistorie):
                            salnavn, stykke_id, salnavn, self._teater_id, int(mengde)))
             ledige_rader = [{"radnummer": rad_data[0],
                              "områdenummer": rad_data[1],
-                             "ledie_kolonner": [int(kolonne) for kolonne in rad_data[2].split(",")]}
+                             "ledige_kolonner": [int(kolonne) for kolonne in rad_data[2].split(",")]}
                             for rad_data in cursor.fetchall()]
+            print(f"Disse radene har minst {mengde} ledige seter:")
+            for rad in ledige_rader:
+                print(
+                    f"Rad {rad['radnummer']} i område {rad['områdenummer']} har {len(rad['ledige_kolonner'])} ledige seter")
             return ledige_rader
 
     def utfør_kjøp(self, stoler, fremvisningstidspunkt, salnavn, stykke_id):
@@ -48,13 +74,38 @@ class Brukerhistorie3(Brukerhistorie):
                   salnavn, self._teater_id, fremvisningstidspunkt, stykke_id)
                  for stol in stoler]
             )
+            query = """
+                    SELECT * FROM Billett
+                    WHERE Fremvisningstidspunkt = ?
+                    AND StykkeID = ?
+                    AND TeaterID = ?
+                    """
+            cursor.execute(query, (fremvisningstidspunkt,
+                           stykke_id, self._teater_id))
+            inserted_tickets = cursor.fetchall()
+            print(inserted_tickets)
 
     def full_brukerhistorie(self):
-        ledige_rader = self.hent_ledige_rader(9, '2024-03-19 18:30', 'Hovedscenen', 2)
-        print("Disse radene har minst 9 ledige seter")
-        print(ledige_rader)
+        MINIMUM_LEDIGE_SETER = 9
+        FREMVISNINGSTIDSPUNKT = '2024-03-19 18:30'
+        SALNAVN = 'Hovedscenen'
+        STYKKE_ID = 2
+
+        ledige_rader = self.hent_ledige_rader(
+            MINIMUM_LEDIGE_SETER, FREMVISNINGSTIDSPUNKT, SALNAVN, STYKKE_ID)
+        områdenummer, radnummer = self._spør_om_rad(
+            MINIMUM_LEDIGE_SETER, ledige_rader)
         for rad in ledige_rader:
-            print(f"Rad {rad['radnummer']} i område {rad['områdenummer']} has {len(rad['ledie_kolonner'])} ledige seter")
+            if områdenummer == rad["områdenummer"] and radnummer == rad["radnummer"]:
+                stoler = [{
+                    "radnummer": radnummer,
+                    "områdenummer": områdenummer,
+                    "kolonnenummer": kolonnenummer
+                } for kolonnenummer in rad["ledige_kolonner"][:MINIMUM_LEDIGE_SETER]]
+                self.utfør_kjøp(stoler, FREMVISNINGSTIDSPUNKT,
+                                SALNAVN, STYKKE_ID)
+
+                break
 
 
 if __name__ == "__main__":
