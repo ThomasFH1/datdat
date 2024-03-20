@@ -1,2 +1,2 @@
-"ADD auto_increment til StykkeID og TeaterID og BillettID... og..." - Thomas Hagland 2024
+"ADD auto_increment til StykkeID og TeaterID og BillettID, AnsattID.. og..." - Thomas Hagland 2024
 La til Handicap på stol
