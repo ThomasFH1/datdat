@@ -127,7 +127,7 @@ class Brukerhistorie3(Brukerhistorie):
 
     def full_brukerhistorie(self):
         MINIMUM_LEDIGE_SETER = 9
-        FREMVISNINGSTIDSPUNKT = '2024-02-03 18:30'
+        FREMVISNINGSTIDSPUNKT = '2024-02-03'
         SALNAVN = 'Hovedscenen'
         STYKKE_ID = 2
         KUNDE_ID = 30
