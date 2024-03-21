@@ -21,8 +21,7 @@ VALUES
 /*Akter SAAEK - akt ikke oppgitt, antar bare en akt*/
 INSERT INTO Akt (Aktnummer, StykkeID, Aktnavn)
 VALUES 
-(1, 1, 'akt_1'),
-(2,1,'akt_2');
+(1, 1, 'akt_1');
 
 
 /*Setter inn skuespillere kongsemnene først som brukere, så ansatte*/
@@ -271,10 +270,10 @@ VALUES
 INSERT INTO Deltar (Aktnummer, StykkeID, OppgaveID)
 VALUES 
 (1, 1, 20), 
-(2, 1, 21),
+(1, 1, 21),
 (1, 1, 22), 
 (1, 1, 23), 
-(2, 1, 24),
+(1, 1, 24),
 (1, 1, 25),
 (1, 1, 26);
 
