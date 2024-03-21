@@ -106,6 +106,24 @@ class Brukerhistorie3(Brukerhistorie):
                                 salnavn, stykke_id, kunde_id)
 
                 break
+    
+    def pris_på_kjøp(self, antall: int, prisgruppe: str, stykkeID: int):
+            with sqlite3.connect(self._db_file_path) as con:
+                cursor = con.cursor()
+                cursor.execute(
+                    """
+                    SELECT Pris
+                    FROM BillettPris
+                    WHERE Prisgruppe = ? AND StykkeID = ?
+                    """, (prisgruppe, stykkeID)
+                )
+                result = cursor.fetchone()
+                
+                pris_per_billett = result[0]
+                total_pris = pris_per_billett * antall
+                print("Det kostet kr: {}".format(total_pris))
+
+
 
     def full_brukerhistorie(self):
         MINIMUM_LEDIGE_SETER = 9
@@ -113,9 +131,13 @@ class Brukerhistorie3(Brukerhistorie):
         SALNAVN = 'Hovedscenen'
         STYKKE_ID = 2
         KUNDE_ID = 30
+        PRISGRUPPE = 'Ordinær'
 
         self.kjøp_seter_samme_rad(
             MINIMUM_LEDIGE_SETER, FREMVISNINGSTIDSPUNKT, SALNAVN, STYKKE_ID, KUNDE_ID)
+        self.pris_på_kjøp(
+            MINIMUM_LEDIGE_SETER, PRISGRUPPE, STYKKE_ID
+        )
 
 
 if __name__ == "__main__":
