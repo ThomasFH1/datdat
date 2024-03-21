@@ -91,10 +91,10 @@ VALUES
 
 INSERT INTO Ansatt (Personnummer, AnsattID)
 VALUES 
-('00000000021', 20),
-('00000000022', 21),
-('00000000023', 22),
-('00000000024', 23);
+(00000000021, 20),
+(00000000022, 21),
+(00000000023, 22),
+(00000000024, 23);
 
 /*Setter inn kunstnerisk lag til SAAEK først som brukere, så ansatte*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
@@ -107,11 +107,11 @@ VALUES
 
 INSERT INTO Ansatt (Personnummer, AnsattID)
 VALUES 
-('00000000025', 24),
-('00000000026', 25),
-('00000000027', 26),
-('00000000028', 27),
-('00000000029', 28);
+(00000000025, 24),
+(00000000026, 25),
+(00000000027, 26),
+(00000000028, 27),
+(00000000029, 28);
 
 /*Fremvisninger SAAEK, pass på at TeaterID og StykkeID er riktig*/
 INSERT INTO Fremvisning (Fremvisningstidspunkt, Salnavn, TeaterID, StykkeID)
