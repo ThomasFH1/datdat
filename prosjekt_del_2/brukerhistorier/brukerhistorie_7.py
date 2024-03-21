@@ -11,7 +11,7 @@ class Brukerhistorie7(Brukerhistorie):
                     WITH SkuespillerOppgaver AS (
                     SELECT ho.AnsattID, d.Aktnummer, d.StykkeID
                     FROM Bruker b
-                    JOIN Ansatt a ON b.BrukerID = a.BrukerID
+                    JOIN Ansatt a ON b.BrukerID = a.AnsattID
                     JOIN HarOppgaver ho ON a.AnsattID = ho.AnsattID
                     JOIN Deltar d ON ho.OppgaveID = d.OppgaveID AND ho.StykkeID = d.StykkeID
                     WHERE b.Fornavn = ? AND b.Etternavn = ?
@@ -21,7 +21,7 @@ class Brukerhistorie7(Brukerhistorie):
                     JOIN Deltar d ON so.Aktnummer = d.Aktnummer AND so.StykkeID = d.StykkeID
                     JOIN HarOppgaver ho ON d.OppgaveID = ho.OppgaveID AND d.StykkeID = ho.StykkeID
                     JOIN Ansatt a ON ho.AnsattID = a.AnsattID
-                    JOIN Bruker b ON a.BrukerID = b.BrukerID
+                    JOIN Bruker b ON a.AnsattID = b.BrukerID
                     JOIN Teaterstykke ts ON so.StykkeID = ts.StykkeID
                     WHERE NOT (a.AnsattID IN (SELECT AnsattID FROM SkuespillerOppgaver))
                     ORDER BY ts.Stykketittel, b.Etternavn, b.Fornavn
@@ -47,8 +47,8 @@ class Brukerhistorie7(Brukerhistorie):
 
 
     def full_brukerhistorie(self):
-        fornavn = input("Fornavn:")
-        etternavn= input("Etternavn:")
+        fornavn = input("Fornavn: ")
+        etternavn= input("Etternavn: ")
         self.finn_skuespillere_som_spilt_sammen(fornavn, etternavn)
 
 
