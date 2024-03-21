@@ -134,7 +134,7 @@ class Brukerhistorie3(Brukerhistorie):
         PRISGRUPPE = 'Ordinær'
 
         self.kjøp_seter_samme_rad(
-            MINIMUM_LEDIGE_SETER, FREMVISNINGSTIDSPUNKT, SALNAVN, STYKKE_ID, KUNDE_ID)
+            MINIMUM_LEDIGE_SETER, FREMVISNINGSTIDSPUNKT, SALNAVN, STYKKE_ID, KUNDE_ID, PRISGRUPPE)
         self.pris_på_kjøp(
             MINIMUM_LEDIGE_SETER, PRISGRUPPE, STYKKE_ID
         )
