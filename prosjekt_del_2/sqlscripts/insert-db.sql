@@ -72,13 +72,13 @@ VALUES
 /*Ansatte med AnsattID 13-19*/
 INSERT INTO Ansatt (Personnummer, AnsattID)
 VALUES 
-('00000000014', 13),
-('00000000015', 14),
-('00000000016', 15),
-('00000000017', 16),
-('00000000018', 17),
-('00000000019', 18),
-('00000000020', 19);
+(00000000014, 13),
+(00000000015, 14),
+(00000000016, 15),
+(00000000017, 16),
+(00000000018, 17),
+(00000000019, 18),
+(00000000020, 19);
 
 /*Setter inn kunstnerisk lag til kongsemnene først som brukere, så ansatte*/
 /*Brukere med BrukerID 20-23*/
