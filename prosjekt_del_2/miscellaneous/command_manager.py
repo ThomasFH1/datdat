@@ -2,6 +2,7 @@ from brukerhistorier import BrukerhistorieHandler
 from .db_utils import DBUtils
 from .logger import logger
 
+
 def command_handler(commands={}):
     def decorator(func):
         commands[func.__name__] = func
@@ -80,14 +81,21 @@ class CommandManager(BrukerhistorieHandler):
         brukerhistorie = self._brukerhistorie_handler_instance.brukerhistorier[3]
         brukerhistorie.utfør_kjøp(
             stoler, fremvisningstidspunkt, salnavn, stykke_id)
+
     @cmd
     def kjøp_seter_samme_rad(
             self, minimum_ledige_seter, fremvisningstidspunkt,
-            salnavn, stykke_id, kunde_id):
+            salnavn, stykke_id, kunde_id, prisgruppe):
         brukerhistorie = self._brukerhistorie_handler_instance.brukerhistorier[3]
         brukerhistorie.kjøp_seter_samme_rad(
             int(minimum_ledige_seter), fremvisningstidspunkt,
-            salnavn, int(stykke_id), int(kunde_id))
+            salnavn, int(stykke_id), int(kunde_id), prisgruppe)
+
+    @cmd
+    def pris_på_kjøp(self, minimum_ledige_seter, prisgruppe, stykke_id):
+        brukerhistorie = self._brukerhistorie_handler_instance.brukerhistorier[3]
+        brukerhistorie.pris_på_kjøp(
+            int(minimum_ledige_seter), prisgruppe, int(stykke_id))
 
     @cmd
     def hent_forestillinger(self):

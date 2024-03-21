@@ -65,7 +65,7 @@ class Brukerhistorie3(Brukerhistorie):
                     f"Rad {rad['radnummer']} i område {rad['områdenummer']} har {len(rad['ledige_kolonner'])} ledige seter")
             return ledige_rader
 
-    def utfør_kjøp(self, stoler, fremvisningstidspunkt, salnavn, stykke_id, kunde_id):
+    def utfør_kjøp(self, stoler, fremvisningstidspunkt, salnavn, stykke_id, kunde_id, prisgruppe):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
             cursor.execute("INSERT INTO Kjøp (KundeID, Kjøpstidspunkt) VALUES (?, Date('now'))",
@@ -81,7 +81,7 @@ class Brukerhistorie3(Brukerhistorie):
                 KjøpID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 [(stol["kolonnenummer"], stol["radnummer"], stol["områdenummer"],
-                  salnavn, self._teater_id, fremvisningstidspunkt, stykke_id, "Ordinær", kjøp_id)
+                  salnavn, self._teater_id, fremvisningstidspunkt, stykke_id, prisgruppe, kjøp_id)
                  for stol in stoler]
             )
 
@@ -89,7 +89,7 @@ class Brukerhistorie3(Brukerhistorie):
 
     def kjøp_seter_samme_rad(
             self, minimum_ledige_seter, fremvisningstidspunkt,
-            salnavn, stykke_id, kunde_id):
+            salnavn, stykke_id, kunde_id, prisgruppe):
 
         ledige_rader = self.hent_ledige_rader(
             minimum_ledige_seter, fremvisningstidspunkt, salnavn, stykke_id)
@@ -103,7 +103,7 @@ class Brukerhistorie3(Brukerhistorie):
                     "kolonnenummer": kolonnenummer
                 } for kolonnenummer in rad["ledige_kolonner"][:minimum_ledige_seter]]
                 self.utfør_kjøp(stoler, fremvisningstidspunkt,
-                                salnavn, stykke_id, kunde_id)
+                                salnavn, stykke_id, kunde_id, prisgruppe)
 
                 break
     
