@@ -80,6 +80,14 @@ class CommandManager(BrukerhistorieHandler):
         brukerhistorie = self._brukerhistorie_handler_instance.brukerhistorier[3]
         brukerhistorie.utfør_kjøp(
             stoler, fremvisningstidspunkt, salnavn, stykke_id)
+    @cmd
+    def kjøp_seter_samme_rad(
+            self, minimum_ledige_seter, fremvisningstidspunkt,
+            salnavn, stykke_id, kunde_id):
+        brukerhistorie = self._brukerhistorie_handler_instance.brukerhistorier[3]
+        brukerhistorie.kjøp_seter_samme_rad(
+            int(minimum_ledige_seter), fremvisningstidspunkt,
+            salnavn, int(stykke_id), int(kunde_id))
 
     @cmd
     def hent_forestillinger(self):
