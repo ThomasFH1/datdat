@@ -280,11 +280,13 @@ VALUES
 /*Brukerhistorie 3, fiktiv kunde*/
 INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES
+('Prinsesse', 'Harald', '+47000030', 'Kongens gate 1, 0153 Oslo'),
 ('Kong', 'Harald', '+47000030', 'Kongens gate 1, 0153 Oslo');
 
 INSERT INTO Kunde (KundeID)
 VALUES
-(29);
+(29),
+(30);
 
 INSERT INTO BillettPris (Prisgruppe, StykkeID, Pris, Minimumsantall)
 VALUES

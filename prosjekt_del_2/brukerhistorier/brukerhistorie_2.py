@@ -17,10 +17,7 @@ class Brukerhistorie2(Brukerhistorie):
     def sett_inn_billetter_til_fremvisning(self, sal_filnavn, stykke_id):
         KUNDE_ID = 29
 
-        områder, dato = les_salfil(f"{sal_filnavn}.txt")
-        salnavn = " ".join([word.capitalize()
-                            for word in sal_filnavn.split("-")])
-
+        områder, dato, salnavn = les_salfil(f"{sal_filnavn}")
         self._sett_inn_fremvisning(salnavn, stykke_id, dato)
 
         områdenummer = 0

@@ -1,7 +1,9 @@
 
 def les_salfil(salfil):
     områder = {}
-    with open(f"files_needed/{salfil}", "r") as f:
+    salnavn = " ".join([word.capitalize() for word in salfil.split("-")])
+
+    with open(f"files_needed/{salfil}.txt", "r") as f:
         dato = f.readline().strip()
 
         for line in f:
@@ -10,6 +12,6 @@ def les_salfil(salfil):
                 områder[last_område] = []
             else:
                 ny_rad = [int(seat)
-                            for seat in line.strip().replace("x", "")]
+                          for seat in line.strip().replace("x", "")]
                 områder[last_område].append(ny_rad)
-    return områder, dato
+    return områder, dato, salnavn

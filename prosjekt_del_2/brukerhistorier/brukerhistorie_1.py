@@ -7,10 +7,8 @@ class Brukerhistorie1(Brukerhistorie):
     def sett_inn_stoler(self, sal_filnavn):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
-            områder, dato = les_salfil(f"{sal_filnavn}.txt")
-            salnavn = " ".join([word.capitalize()
-                                for word in sal_filnavn.split("-")])
-
+            områder, dato, salnavn = les_salfil(f"{sal_filnavn}")
+            
             områdenummer = 0
             for områdenavn, rader in områder.items():
                 områdenummer += 1

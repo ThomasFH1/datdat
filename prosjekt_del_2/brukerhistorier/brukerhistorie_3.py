@@ -112,7 +112,7 @@ class Brukerhistorie3(Brukerhistorie):
         FREMVISNINGSTIDSPUNKT = '2024-03-19 18:30'
         SALNAVN = 'Hovedscenen'
         STYKKE_ID = 2
-        KUNDE_ID = 29
+        KUNDE_ID = 30
 
         self.kjøp_seter_samme_rad(
             MINIMUM_LEDIGE_SETER, FREMVISNINGSTIDSPUNKT, SALNAVN, STYKKE_ID, KUNDE_ID)
