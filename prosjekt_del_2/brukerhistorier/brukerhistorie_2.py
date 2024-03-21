@@ -4,16 +4,6 @@ from miscellaneous.les_salfil import les_salfil
 
 
 class Brukerhistorie2(Brukerhistorie):
-    def _sett_inn_billett(self, kolonnenummer, radnummer, områdenummer, salnavn, dato, stykke_id):
-        with sqlite3.connect(self._db_file_path) as con:
-            cursor = con.cursor()
-            cursor.execute(
-                """INSERT INTO Billett 
-                (Kolonnenummer, Radnummer, Områdenummer, Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID, PrisGruppe) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                (kolonnenummer, radnummer, områdenummer, salnavn, self._teater_id, dato, stykke_id, "Ordinær"))
-            con.commit()
-
     def _sett_inn_fremvisning(self, salnavn, stykke_id, dato):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
@@ -25,6 +15,8 @@ class Brukerhistorie2(Brukerhistorie):
             con.commit()
 
     def sett_inn_billetter_til_fremvisning(self, sal_filnavn, stykke_id):
+        KUNDE_ID = 29
+
         områder, dato = les_salfil(f"{sal_filnavn}.txt")
         salnavn = " ".join([word.capitalize()
                             for word in sal_filnavn.split("-")])
@@ -32,16 +24,30 @@ class Brukerhistorie2(Brukerhistorie):
         self._sett_inn_fremvisning(salnavn, stykke_id, dato)
 
         områdenummer = 0
-        for områdenavn, rader in områder.items():
-            områdenummer += 1
-            for i, rad in enumerate(reversed(rader)):
-                radnummer = i + 1
-                for j, status in enumerate(rad):
-                    if not status:
-                        continue
-                    kolonnenummer = j + 1
-                    self._sett_inn_billett(
-                        kolonnenummer, radnummer, områdenummer, salnavn, dato, stykke_id)
+        with sqlite3.connect(self._db_file_path) as con:
+            cursor = con.cursor()
+            cursor.execute("INSERT INTO Kjøp (KundeID, Kjøpstidspunkt) VALUES (?, Date('now'))",
+                           (KUNDE_ID, ))
+            cursor.execute(
+                "SELECT KjøpID FROM Kjøp ORDER BY KjøpID DESC LIMIT 1"
+            )
+            kjøp_id = cursor.fetchone()[0]
+            for områdenavn, rader in områder.items():
+                områdenummer += 1
+                for i, rad in enumerate(reversed(rader)):
+                    radnummer = i + 1
+                    for j, status in enumerate(rad):
+                        if not status:
+                            continue
+                        kolonnenummer = j + 1
+                        cursor.execute(
+                            """INSERT INTO Billett 
+                            (Kolonnenummer, Radnummer, Områdenummer, Salnavn,
+                            TeaterID, Fremvisningstidspunkt, StykkeID, PrisGruppe,
+                            KjøpID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                            (kolonnenummer, radnummer, områdenummer, salnavn,
+                             self._teater_id, dato, stykke_id, "Ordinær", kjøp_id))
+            con.commit()
 
     def full_brukerhistorie(self):
         self.sett_inn_billetter_til_fremvisning("hovedscenen", 2)

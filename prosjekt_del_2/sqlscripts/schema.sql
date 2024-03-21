@@ -100,6 +100,8 @@ CREATE TABLE
         Fremvisningstidspunkt DATETIME NOT NULL,
         StykkeID INT NOT NULL,
         Prisgruppe VARCHAR(128) NOT NULL,
+        KjøpID INTEGER NOT NULL,
+        FOREIGN KEY (KjøpID) REFERENCES Kjøp (KjøpID),
         FOREIGN KEY (
             Kolonnenummer,
             Radnummer,
@@ -144,27 +146,23 @@ CREATE TABLE
 
 CREATE TABLE
     Ansatt (
-        AnsattID INTEGER PRIMARY KEY AUTOINCREMENT,
+        AnsattID INTEGER PRIMARY KEY,
         Personnummer INT NOT NULL UNIQUE,
-        BrukerID INT NOT NULL UNIQUE,
-        FOREIGN KEY (BrukerID) REFERENCES Bruker (BrukerID)
+        FOREIGN KEY (AnsattID) REFERENCES Bruker (BrukerID)
     );
 
 CREATE TABLE
     Kunde (
         KundeID INT PRIMARY KEY,
-        BrukerID INT NOT NULL UNIQUE,
-        FOREIGN KEY (BrukerID) REFERENCES Bruker (BrukerID)
+        FOREIGN KEY (KundeID) REFERENCES Bruker (BrukerID)
     );
 
 CREATE TABLE
     Kjøp (
-        KjøpID INT PRIMARY KEY,
+        KjøpID INTEGER PRIMARY KEY AUTOINCREMENT,
         KundeID INT NOT NULL,
-        BillettID INT NOT NULL UNIQUE,
         Kjøpstidspunkt DATETIME NOT NULL,
-        FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID),
-        FOREIGN KEY (BillettID) REFERENCES Billett (BillettID)
+        FOREIGN KEY (KundeID) REFERENCES Kunde (KundeID)
     );
 
 CREATE TABLE

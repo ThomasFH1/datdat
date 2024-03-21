@@ -6,20 +6,24 @@ from .brukerhistorie import Brukerhistorie
 
 class Brukerhistorie3(Brukerhistorie):
     @staticmethod
-    def _spør_om_rad(minimum_ledige_seter, ledige_rader):
+    def _spør_bruker_om_hvilken_rad(minimum_ledige_seter, ledige_rader):
         """Tar input og verifiserer at den raden har nok ledige seter."""
 
         try:
             områdenummer = int(
                 input("Hvilket område vil du kjøpe billetter til: "))
-            if not any([ledig_rad["områdenummer"] == områdenummer for ledig_rad in ledige_rader]):
+            if not any([
+                    ledig_rad["områdenummer"] == områdenummer
+                    for ledig_rad in ledige_rader]):
                 logger.error(
                     f"Område hadde ikke en rad med minst {minimum_ledige_seter} ledige seter!")
                 exit()
 
             radnummer = int(input("Hvilken rad vil du kjøpe billetter til: "))
-            if not any([ledig_rad["områdenummer"] == områdenummer and ledig_rad["radnummer"] == radnummer
-                        for ledig_rad in ledige_rader]):
+            if not any([
+                    ledig_rad["områdenummer"] == områdenummer
+                    and ledig_rad["radnummer"] == radnummer
+                    for ledig_rad in ledige_rader]):
                 logger.error(
                     f"Raden hadde ikke minst {minimum_ledige_seter} ledige seter!")
                 exit()
@@ -61,52 +65,57 @@ class Brukerhistorie3(Brukerhistorie):
                     f"Rad {rad['radnummer']} i område {rad['områdenummer']} har {len(rad['ledige_kolonner'])} ledige seter")
             return ledige_rader
 
-    def utfør_kjøp(self, stoler, fremvisningstidspunkt, salnavn, stykke_id):
-        # TODO
-
+    def utfør_kjøp(self, stoler, fremvisningstidspunkt, salnavn, stykke_id, kunde_id):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
+            cursor.execute("INSERT INTO Kjøp (KundeID, Kjøpstidspunkt) VALUES (?, Date('now'))",
+                           (kunde_id, ))
+            cursor.execute(
+                "SELECT KjøpID FROM Kjøp ORDER BY KjøpID DESC LIMIT 1"
+            )
+            kjøp_id = cursor.fetchone()[0]
             cursor.executemany(
                 """
                 INSERT INTO Billett (Kolonnenummer, Radnummer, Områdenummer, 
-                Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID, PrisGruppe)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                Salnavn, TeaterID, Fremvisningstidspunkt, StykkeID, PrisGruppe,
+                KjøpID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 [(stol["kolonnenummer"], stol["radnummer"], stol["områdenummer"],
-                  salnavn, self._teater_id, fremvisningstidspunkt, stykke_id, "Ordinær")
+                  salnavn, self._teater_id, fremvisningstidspunkt, stykke_id, "Ordinær", kjøp_id)
                  for stol in stoler]
             )
-            cursor.execute(
-                "SELECT BillettID FROM Billett ORDER BY BillettID DESC LIMIT 1"
-            )
-            siste_id = cursor.fetchone()[0]
-            antall_billetter_kjøpt = len(stoler) 
-            første_id = siste_id - antall_billetter_kjøpt + 1
-            
 
-            print(siste_id, første_id)
+            con.commit()
 
-    def full_brukerhistorie(self):
-        MINIMUM_LEDIGE_SETER = 9
-        FREMVISNINGSTIDSPUNKT = '2024-03-19 18:30'
-        SALNAVN = 'Hovedscenen'
-        STYKKE_ID = 2
+    def kjøp_seter_samme_rad(
+            self, minimum_ledige_seter, fremvisningstidspunkt,
+            salnavn, stykke_id, kunde_id):
 
         ledige_rader = self.hent_ledige_rader(
-            MINIMUM_LEDIGE_SETER, FREMVISNINGSTIDSPUNKT, SALNAVN, STYKKE_ID)
-        områdenummer, radnummer = self._spør_om_rad(
-            MINIMUM_LEDIGE_SETER, ledige_rader)
+            minimum_ledige_seter, fremvisningstidspunkt, salnavn, stykke_id)
+        områdenummer, radnummer = self._spør_bruker_om_hvilken_rad(
+            minimum_ledige_seter, ledige_rader)
         for rad in ledige_rader:
             if områdenummer == rad["områdenummer"] and radnummer == rad["radnummer"]:
                 stoler = [{
                     "radnummer": radnummer,
                     "områdenummer": områdenummer,
                     "kolonnenummer": kolonnenummer
-                } for kolonnenummer in rad["ledige_kolonner"][:MINIMUM_LEDIGE_SETER]]
-                self.utfør_kjøp(stoler, FREMVISNINGSTIDSPUNKT,
-                                SALNAVN, STYKKE_ID)
+                } for kolonnenummer in rad["ledige_kolonner"][:minimum_ledige_seter]]
+                self.utfør_kjøp(stoler, fremvisningstidspunkt,
+                                salnavn, stykke_id, kunde_id)
 
                 break
+
+    def full_brukerhistorie(self):
+        MINIMUM_LEDIGE_SETER = 9
+        FREMVISNINGSTIDSPUNKT = '2024-03-19 18:30'
+        SALNAVN = 'Hovedscenen'
+        STYKKE_ID = 2
+        KUNDE_ID = 29
+
+        self.kjøp_seter_samme_rad(
+            MINIMUM_LEDIGE_SETER, FREMVISNINGSTIDSPUNKT, SALNAVN, STYKKE_ID, KUNDE_ID)
 
 
 if __name__ == "__main__":

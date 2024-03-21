@@ -42,7 +42,7 @@ VALUES
 ('Snorre Ryen', 'Tøndel', '+47000013', 'Slottsplassen 1, 0010 Oslo');
 
 /*Ansatte med AnsattID 1-12*/
-INSERT INTO Ansatt (Personnummer, BrukerID)
+INSERT INTO Ansatt (Personnummer, AnsattID)
 VALUES 
 (00000000001, 1),
 (00000000002, 2),
@@ -70,7 +70,7 @@ VALUES
 ('Åsmund', 'Flaten', '+47000020', 'Slottsplassen 1, 0010 Oslo');
 
 /*Ansatte med AnsattID 13-19*/
-INSERT INTO Ansatt (Personnummer, BrukerID)
+INSERT INTO Ansatt (Personnummer, AnsattID)
 VALUES 
 ('00000000014', 13),
 ('00000000015', 14),
@@ -89,7 +89,7 @@ VALUES
 ('Eivind', 'Myren', '+47000023', 'Slottsplassen 1, 0010 Oslo'),
 ('Mina', 'Rype Stokke', '+47000024', 'Slottsplassen 1, 0010 Oslo');
 
-INSERT INTO Ansatt (Personnummer, BrukerID)
+INSERT INTO Ansatt (Personnummer, AnsattID)
 VALUES 
 ('00000000021', 20),
 ('00000000022', 21),
@@ -105,7 +105,7 @@ VALUES
 ('Magnus', 'Mikaelsen', '+47000028', 'Slottsplassen 1, 0010 Oslo'),
 ('Kristoffer', 'Spender', '+47000029', 'Slottsplassen 1, 0010 Oslo');
 
-INSERT INTO Ansatt (Personnummer, BrukerID)
+INSERT INTO Ansatt (Personnummer, AnsattID)
 VALUES 
 ('00000000025', 24),
 ('00000000026', 25),
@@ -282,9 +282,9 @@ INSERT INTO Bruker (Fornavn, Etternavn, Telefonnummer, Adresse)
 VALUES
 ('Kong', 'Harald', '+47000030', 'Kongens gate 1, 0153 Oslo');
 
-INSERT INTO Kunde (KundeID, BrukerID)
+INSERT INTO Kunde (KundeID)
 VALUES
-(30, 30);
+(29);
 
 INSERT INTO BillettPris (Prisgruppe, StykkeID, Pris, Minimumsantall)
 VALUES
