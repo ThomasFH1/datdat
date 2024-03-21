@@ -8,11 +8,12 @@ class Brukerhistorie4(Brukerhistorie):
             cursor = con.cursor()
 
             query = """
-            SELECT Stykketittel, Fremvisning.Fremvisningstidspunkt, COUNT(BillettID) as AntallSolgteBilletter
-            FROM Fremvisning
-            JOIN Teaterstykke on Fremvisning.StykkeID = Teaterstykke.StykkeID
-            LEFT JOIN Billett on Fremvisning.Fremvisningstidspunkt = Billett.Fremvisningstidspunkt
-            GROUP BY Fremvisning.Fremvisningstidspunkt, Fremvisning.StykkeID, Fremvisning.Salnavn, Fremvisning.TeaterID
+           SELECT Teaterstykke.Stykketittel, Fremvisning.Fremvisningstidspunkt, COUNT(Billett.BillettID) as AntallSolgteBilletter
+           FROM Fremvisning
+            JOIN Teaterstykke ON Fremvisning.StykkeID = Teaterstykke.StykkeID
+            LEFT JOIN Billett ON Fremvisning.Fremvisningstidspunkt = Billett.Fremvisningstidspunkt AND Fremvisning.StykkeID = Billett.StykkeID AND Fremvisning.Salnavn = Billett.Salnavn AND Fremvisning.TeaterID = Billett.TeaterID
+            GROUP BY Fremvisning.Fremvisningstidspunkt, Teaterstykke.Stykketittel
+            ORDER BY Fremvisning.Fremvisningstidspunkt, Teaterstykke.Stykketittel
             """
             cursor.execute(query)
             row = cursor.fetchall()
