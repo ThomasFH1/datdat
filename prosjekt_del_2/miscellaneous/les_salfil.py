@@ -4,7 +4,7 @@ def les_salfil(salfil):
     salnavn = " ".join([word.capitalize() for word in salfil.split("-")])
 
     with open(f"files_needed/{salfil}.txt", "r") as f:
-        dato = f.readline().strip()
+        dato = f.readline().strip().split()[1]
 
         for line in f:
             if not line[0].isdigit():
