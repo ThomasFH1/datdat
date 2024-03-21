@@ -6,10 +6,10 @@ class DBUtils:
     def __init__(self, db_file_path):
         self._db_file_path = db_file_path
 
-    def _execute_sqlscript(self, intial_data_sql_path):
+    def _execute_sqlscript(self, sql_path):
         with sqlite3.connect(self._db_file_path) as con:
             cursor = con.cursor()
-            with open(intial_data_sql_path, 'r', encoding='utf-8') as sql_file:
+            with open(sql_path, 'r', encoding='utf-8') as sql_file:
                 sql_script = sql_file.read()
                 cursor.executescript(sql_script)
             con.commit()
@@ -51,11 +51,11 @@ class DBUtils:
         self.load_intial_data()
 
     def configure_db(self):
-        self._execute_sqlscript("opprett.sql")
-        self._execute_sqlscript("schema.sql")
+        self._execute_sqlscript("sqlscripts/opprett.sql")
+        self._execute_sqlscript("sqlscripts/schema.sql")
         logger.debug("Database configured!")
 
     def load_intial_data(self):
-        self._execute_sqlscript("insert-db.sql")
+        self._execute_sqlscript("sqlscripts/insert-db.sql")
         logger.debug("Initial data loaded!")
 

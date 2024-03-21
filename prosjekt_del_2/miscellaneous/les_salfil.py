@@ -1,7 +1,7 @@
 
 def les_salfil(salfil):
     områder = {}
-    with open(salfil, "r") as f:
+    with open(f"files_needed/{salfil}", "r") as f:
         dato = f.readline().strip()
 
         for line in f:
